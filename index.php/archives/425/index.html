@@ -134,14 +134,15 @@
 <div>对于第一种，我们修改一下manifest文件，把version改为1.4，然后刷新页面。</div><br><div><img class="alignnone" src="http://tenny.qiniudn.com/appcache6.png" alt="" width="1009" height="292"></div><br><div>我们可以发现，appcache更新了缓存重新从网络上拉去的cache的文件，但是，我们如果想要看到改变，必须再次刷新页面。</div><br><div></div><br><div>对于第二种方法，我们首先修改一下我们的js，添加一个监听事件：</div><br><div><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.applicationCache.addEventListener(<span class="string">'updateready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'updateready!'</span>);</div><div class="line">        <span class="built_in">window</span>.applicationCache.swapCache();</div><div class="line">    &#125;);</div></pre></td></tr></table></figure><br><br>清除浏览器缓存再试一次，这次我们在console里调用window.applicationCache.update();，看看发生了什么：<br><br><img class="alignnone" src="http://tenny.qiniudn.com/appcache7.png" alt="" width="864" height="211"><br><br>updateready事件触发了，同样，appcache也更新了缓存，其中swapCache方法的意思是重新应用跟新后的缓存来替换原来的缓存！，到这里后基本的appcache也差不多了。<br><h3>注意事项：</h3><br><ul><br>    <li>站点离线存储的容量限制是5M</li><br>    <li>如果manifest文件，或者内部列举的某一个文件不能正常下载，整个更新过程将视为失败，浏览器继续全部使用老的缓存</li><br>    <li>引用manifest的html必须与manifest文件同源，在同一个域下</li><br>    <li>FALLBACK中的资源必须和manifest文件同源</li><br>    <li>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</li><br>    <li>站点中的其他页面即使没有设置manifest属性，请求的资源如果在缓存中也从缓存中访问</li><br>    <li>当manifest文件发生改变时，资源请求本身也会触发更新</li><br></ul><br>完！<br><br></div>
       
     </div>
+    
     <footer class="article-footer">
       
-        <a data-url="https://www.nihaoshijie.com.cn/index.php/archives/425/" data-id="cj24tmxta000aqi9nf12lcjur" class="article-share-link" data-share="baidu" data-title="HTML5离线存储之Application Cache">分享到</a>
+        <a data-url="https://www.nihaoshijie.com.cn/index.php/archives/425/" data-id="cj24ugbic000asm9nkpwk1o4z" class="article-share-link" data-share="baidu" data-title="HTML5离线存储之Application Cache">分享到</a>
       
 
       <a href="https://www.nihaoshijie.com.cn/index.php/archives/425/#ds-thread" class="article-comment-link"><span class="dot">•</span>
       <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span> 次浏览</a>
-      <a href="https://www.nihaoshijie.com.cn/index.php/archives/425/#ds-thread" class="article-comment-link"><span class="dot">•</span>0 条评论</a>
+      <a href="https://www.nihaoshijie.com.cn/index.php/archives/425/#ds-thread" class="article-comment-link"><span class="dot">•</span> <span class="ds-thread-count comment-link alignright" data-thread-key="index.php/archives/425/" data-count-type="comments"></span>  条评论</a>
       
       <a href="/index.php/archives/425/" class="article-date-l">
   <time datetime="2014-08-28T08:50:58.000Z" itemprop="datePublished">2014-08-28</time>
