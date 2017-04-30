@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTTP2.0关于多路复用的研究 | Hexo</title>
+  <title>HTTP2.0关于多路复用的研究 | 吕小鸣前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="关于HTTP2中其他特性的研究可以参考我之前写的文章 关于Server Push的研究 问题一：什么是keep live？HTTP持久连接（HTTP persistent connection，也称作HTTP keep-alive或HTTP connection reuse）是使用同一个TCP连接来发送和接收多个HTTP请求/应答，而不是为每一个新的请求/应答打开新的连接的方法。">
 <meta name="keywords" content="http2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP2.0关于多路复用的研究">
-<meta property="og:url" content="http://yoursite.com/index.php/archives/698/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://www.nihaoshijie.com.cn/index.php/archives/698/index.html">
+<meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="关于HTTP2中其他特性的研究可以参考我之前写的文章 关于Server Push的研究 问题一：什么是keep live？HTTP持久连接（HTTP persistent connection，也称作HTTP keep-alive或HTTP connection reuse）是使用同一个TCP连接来发送和接收多个HTTP请求/应答，而不是为每一个新的请求/应答打开新的连接的方法。">
 <meta property="og:image" content="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png">
 <meta property="og:image" content="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp3.png">
@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="关于HTTP2中其他特性的研究可以参考我之前写的文章 关于Server Push的研究 问题一：什么是keep live？HTTP持久连接（HTTP persistent connection，也称作HTTP keep-alive或HTTP connection reuse）是使用同一个TCP连接来发送和接收多个HTTP请求/应答，而不是为每一个新的请求/应答打开新的连接的方法。">
 <meta name="twitter:image" content="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -30,7 +30,9 @@
   <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
+
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 </head>
 <body>
 <div id="container">
@@ -40,8 +42,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">吕小鸣前端博客</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">热爱前端，关注前端开发技术</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -66,7 +72,7 @@
           <input name=tn type=hidden value="bds">
           <input name=cl type=hidden value="3">
           <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="yoursite.com">
+          <input type="hidden" name="si" value="www.nihaoshijie.com.cn">
         </form>
       </div>
     </div>
@@ -94,7 +100,7 @@
 <p><a href="http://km.oa.com/group/19674/articles/show/286253?kmref=kb_categories" target="_blank" rel="noopener noreferrer">关于Server Push的研究</a></p>
 <p></p><h3><span style="font-weight: bolder;">问题一：什么是keep live？</span></h3><br>HTTP持久连接（HTTP persistent connection，也称作HTTP keep-alive或HTTP connection reuse）是使用同一个TCP连接来发送和接收多个HTTP请求/应答，而不是为每一个新的请求/应答打开新的连接的方法。<br><a id="more"></a><br>我们知道HTTP协议采用“请求-应答”模式，当使用普通模式，即非KeepAlive模式时，每个请求/应答客户和服务器都要新建一个连接，完成 之后立即断开连接（HTTP协议为无连接的协议）；当使用Keep-Alive模式（又称持久连接）时，Keep-Alive功能使客户端到服 务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive功能避免了建立或者重新建立连接。<p></p>
 <p>&nbsp;</p>
-<p></p><h3><span style="font-weight: bolder;">问题二：keep alive和传统的区别？</span></h3><br><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png" target="_blank" rel="external"><img class="alignnone size-full wp-image-700" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png" alt="" width="495" height="289"></a><p></p>
+<p></p><h3><span style="font-weight: bolder;">问题二：keep alive和传统的区别？</span></h3><br><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png"><img class="alignnone size-full wp-image-700" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp1.png" alt="" width="495" height="289"></a><p></p>
 <p>一图胜千言，由图可知引入的keep alive的链接不必在每次请求都开启一个新的链接。</p>
 <p>&nbsp;</p>
 <p></p><h3><span style="font-weight: bolder;">问题三：keep alive如何配置？</span></h3><br><span style="font-weight: bolder;">Apache服务器：</span><p></p>
@@ -104,11 +110,11 @@
 <p>Node.js</p>
 <p><a href="https://nodejs.org/api/http.html#http_class_http_agent" target="_blank" rel="noopener noreferrer">https://nodejs.org/api/http.html#http_class_http_agent</a></p>
 <p>&nbsp;</p>
-<p></p><h3><span style="font-weight: bolder;">问题4：多路复用是什么？</span><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp3.png" target="_blank" rel="external"><img class="alignnone size-full wp-image-703" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp3.png" alt="" width="1472" height="234"></a></h3><br>1）HTTP2的请求的TCP的connection一旦建立，后续请求以stream的方式发送。<p></p>
+<p></p><h3><span style="font-weight: bolder;">问题4：多路复用是什么？</span><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp3.png"><img class="alignnone size-full wp-image-703" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp3.png" alt="" width="1472" height="234"></a></h3><br>1）HTTP2的请求的TCP的connection一旦建立，后续请求以stream的方式发送。<p></p>
 <p>2）每个stream的基本组成单位是frame（二进制帧），每种frame又分为很多种类型例如HEADERS Frame（头部帧），DATA Frame（内容帧）等等。</p>
 <p>3）请求头HEADERS Frame组成了resquest，返回头HEADERS Frame和DATA Frame组成了response，request和response组成了一个stream。</p>
 <p>&nbsp;</p>
-<p></p><h3><span style="font-weight: bolder;">问题5：多路复用和keep alive区别？</span></h3><br><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp2.png" target="_blank" rel="external"><img class="alignnone size-full wp-image-701" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp2.png" alt="" width="779" height="765"></a><p></p>
+<p></p><h3><span style="font-weight: bolder;">问题5：多路复用和keep alive区别？</span></h3><br><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp2.png"><img class="alignnone size-full wp-image-701" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2017/04/kp2.png" alt="" width="779" height="765"></a><p></p>
 <p>1）线头阻塞（Head-of-Line Blocking），HTTP1.X虽然可以采用keep alive来解决复用TCP的问题，但是还是无法解决请求阻塞问题。</p>
 <p>2）所谓请求阻塞意思就是一条TCP的connection在同一时间只能允许一个请求经过，这样假如后续请求想要复用这个链接就必须等到前一个完成才行，正如上图左边表示的。</p>
 <p>3）之所以有这个问题就是因为HTTP1.x需要每条请求都是可是识别，按顺序发送，否则server就无法判断该相应哪个具体的请求。</p>
@@ -124,12 +130,12 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/index.php/archives/698/" data-id="cj24nfz7k000fbf9niyealhm4" class="article-share-link" data-share="baidu" data-title="HTTP2.0关于多路复用的研究">分享到</a>
+        <a data-url="https://www.nihaoshijie.com.cn/index.php/archives/698/" data-id="cj24pqdb5000hgz9nq61pt2x6" class="article-share-link" data-share="baidu" data-title="HTTP2.0关于多路复用的研究">分享到</a>
       
 
-      <a href="http://yoursite.com/index.php/archives/698/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <a href="https://www.nihaoshijie.com.cn/index.php/archives/698/#ds-thread" class="article-comment-link"><span class="dot">•</span>
       <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span> 次浏览</a>
-      <a href="http://yoursite.com/index.php/archives/698/#ds-thread" class="article-comment-link"><span class="dot">•</span>0 条评论</a>
+      <a href="https://www.nihaoshijie.com.cn/index.php/archives/698/#ds-thread" class="article-comment-link"><span class="dot">•</span>0 条评论</a>
       
       <a href="/index.php/archives/698/" class="article-date-l">
   <time datetime="2017-04-25T08:52:32.000Z" itemprop="datePublished">2017-04-25</time>
@@ -148,7 +154,7 @@
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="index.php/archives/698/" data-title="HTTP2.0关于多路复用的研究" data-url="http://yoursite.com/index.php/archives/698/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="index.php/archives/698/" data-title="HTTP2.0关于多路复用的研究" data-url="https://www.nihaoshijie.com.cn/index.php/archives/698/"></div>
   </section>
 </section>
       
@@ -195,7 +201,7 @@
     
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title-l">歸檔</h3>
+      <h3 class="widget-title-l">归档</h3>
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
@@ -205,7 +211,7 @@
   <div class="widget-wrap">
     
     <div class="widget">
-      <h3 class="widget-title-l">標簽</h3>
+      <h3 class="widget-title-l">标签</h3>
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
@@ -215,7 +221,7 @@
   <div class="widget-wrap">
     
     <div class="widget tagcloud">
-      <h3 class="widget-title-l">標簽雲</h3>
+      <h3 class="widget-title-l">标签云</h3>
       <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
@@ -225,7 +231,7 @@
   <div class="widget-wrap">
     
     <div class="widget">
-      <h3 class="widget-title-l">友情鏈接</h3>
+      <h3 class="widget-title-l">友情链接</h3>
       <ul>
         
           <li>
@@ -258,6 +264,7 @@
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
     </div>
   </div>
+
 </footer>
   </div>
   <nav style="display:none;" id="mobile-nav">
@@ -269,7 +276,7 @@
 </nav>
   <!-- totop start -->
 <div id="totop">
-<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 </div>
 
 <!-- totop end -->
