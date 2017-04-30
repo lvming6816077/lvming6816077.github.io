@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTML5离线存储之Application Cache | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于html5的离线存储，大致可分为：     localStorage, sessionStorage    indexedDB    web sql    application cache">
+<meta name="keywords" content="HTML5,离线存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5离线存储之Application Cache">
+<meta property="og:url" content="http://yoursite.com/index.php/archives/425/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于html5的离线存储，大致可分为：     localStorage, sessionStorage    indexedDB    web sql    application cache">
+<meta property="og:image" content="http://tenny.qiniudn.com/applicationcache.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache2.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache3.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache4.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache5.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache6.png">
+<meta property="og:image" content="http://tenny.qiniudn.com/appcache7.png">
+<meta property="og:updated_time" content="2017-04-30T08:59:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5离线存储之Application Cache">
+<meta name="twitter:description" content="关于html5的离线存储，大致可分为：     localStorage, sessionStorage    indexedDB    web sql    application cache">
+<meta name="twitter:image" content="http://tenny.qiniudn.com/applicationcache.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-HTML5离线存储之Application-Cache" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner ">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTML5离线存储之Application Cache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于html5的离线存储，大致可分为：</p>
+<p><ul><br>    <li><span style="color: #303942;">localStorage, sessionStorage</span></li><br>    <li>indexedDB</li><br>    <li>web sql</li><br>    <li>application cache</li><br></ul><br><a id="more"></a><br>可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。</p>
+<p></p><h3>访问流程</h3><br><img class="alignnone" src="http://tenny.qiniudn.com/applicationcache.png" alt="" width="922" height="305"><br>当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。<p></p>
+<p>&nbsp;</p>
+<p></p><h3>特点</h3><p></p>
+<p><ul style="color: #4d4e53;"><br>    <li>离线浏览: 用户可以在离线状态下浏览网站内容。</li><br>    <li>更快的速度: 因为数据被存储在本地，所以速度会更快.</li><br>    <li>减轻服务器的负载: 浏览器只会下载在服务器上发生改变的资源。</li><br></ul><br>&nbsp;</p>
+<p></p><h3>如何使用</h3><br>首先，我们建立一个html文件，类似这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">manifest</span>=<span class="string">"manifest.appcache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>APP CACHE<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"test.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/1.jpg"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/2.jpg"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="built_in">window</span>.applicationCache.status);</div><div class="line">    &#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure><p></p>
+<p>可能有些代码看不懂，我们先看最简单的，第一行配置了一个manifest=”manifest.appcache”（<span style="color: #ff0000;">注意是mani不是main</span>），这是使用app cache首先要配置的，然后我们在这个html文件里引入了两个img做为测试用，然后监听了load时间来查看看application的status，关于applicationCache的api，可以<a href="http://www.w3school.com.cn/html5/html_5_app_cache.asp" target="_blank">查看</a>。</p>
+<p>然后在相同目录下新建一个manifest.appcache文件，注意关于路径要和html页面配置时一致即可。</p>
+<p><pre class="lang:default decode:true">CACHE MANIFEST</pre></p>
+<p>#version 1.3<br>CACHE:<br>    img/1.jpg<br>    img/2.jpg<br>    test.css<br>NETWORK:<br>    *<br>关于manifest.appcache文件，基本格式为<span style="color: #4d4e53;">三段： </span><code style="color: #4d4e53;">CACHE，</code><span style="color: #4d4e53;"> </span><code style="color: #4d4e53;">NETWORK，</code><span style="color: #4d4e53;">与 </span><code style="color: #4d4e53;">FALLBACK，其中NETWORK和FALLBACK为可选项，而第一行CACHE MANIFEST为固定格式，必须写在前面。</code></p>
+<p><strong><code style="font-weight: inherit; font-style: inherit;">CACHE:（必须）</code></strong></p>
+<p>标识出哪些文件需要缓存，可以是相对路径也可以是绝对路径。例如：aa.css，<a href="http://www.baidu.com/aa.js" target="_blank" rel="external">http://www.baidu.com/aa.js</a>.</p>
+<p><strong><code style="font-weight: inherit; font-style: inherit;">NETWORK:（可选）</code></strong></p>
+<p>这一部分是要绕过缓存直接读取的文件，可以使用通配符＊，,也就是说除了上面的cache文件，剩下的文件每次都要重新拉取。例如＊，login.php。</p>
+<p><strong><code style="font-weight: inherit; font-style: inherit;">FALLBACK:（可选）</code></strong></p>
+<p>指定了一个后备页面，当资源无法访问时，浏览器会使用该页面。该段落的每条记录都列出两个 URI—第一个表示资源，第二个表示后备页面。两个 URI 都必须使用相对路径并且与清单文件同源。可以使用通配符。例如*.html  /offline.html。</p>
+<p>有了上面两个文件之后还要配置服务器的mime.types类型，找大盘apache的mime.types文件，添加</p>
+<p><pre class="lang:default decode:true ">text/cache-manifest .appcache</pre><br>OK，上面文件配置完成之后，application cache就可以运行了。</p>
+<p>查看console：</p>
+<p><img class="alignnone" src="http://tenny.qiniudn.com/appcache2.png" alt="" width="1010" height="420"><br>可以看到，一下子这么多log，但是除了4是我们console的log之外，其他的都是appcache自己打的，因为我们配置了manifest，系统会默认打出appcache的log。关于status的值：</p>
+<p>然后，通过log，我们看到一些文件已经被缓存，我们可以查看chrome Resources来查看：</p>
+<p><img class="alignnone" src="http://tenny.qiniudn.com/appcache3.png" alt="" width="1439" height="277"></p>
+<p>可以看到我们的test.html文件也已经被缓存下来了，type是master，顾名思义一个管理着，而manifest.appcache文件为manifest类型。此时我们的appcache已经完成。我们可以尝试把网线断了，或者把服务器关了，同样，我们的项目仍然可以访问，这就是离线缓存。此时console：</p>
+<p><img class="alignnone" src="http://tenny.qiniudn.com/appcache4.png" alt="" width="1010" height="218"></p>
+<p>证明直接从缓存拿去文件：</p>
+<p><img class="alignnone" src="http://tenny.qiniudn.com/appcache5.png" alt="" width="794" height="267"></p>
+<p><strong>更新缓存的方式</strong><br>更新manifest文件<br>浏览器发现manifest文件本身发生变化，便会根据新的manifest文件去获取新的资源进行缓存。</p>
+<p>当manifest文件列表并没有变化的时候，我们通常通过修改manifest注释的方式来改变文件，从而实现更新。<br>通过javascript操作<br>浏览器提供了applicationCache供js访问，通过对于applicationCache对象的操作也能达到更新缓存的目的。<br>清除浏览器缓存</p>
+<div>对于第一种，我们修改一下manifest文件，把version改为1.4，然后刷新页面。</div><br><div><img class="alignnone" src="http://tenny.qiniudn.com/appcache6.png" alt="" width="1009" height="292"></div><br><div>我们可以发现，appcache更新了缓存重新从网络上拉去的cache的文件，但是，我们如果想要看到改变，必须再次刷新页面。</div><br><div></div><br><div>对于第二种方法，我们首先修改一下我们的js，添加一个监听事件：</div><br><div><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.applicationCache.addEventListener(<span class="string">'updateready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'updateready!'</span>);</div><div class="line">        <span class="built_in">window</span>.applicationCache.swapCache();</div><div class="line">    &#125;);</div></pre></td></tr></table></figure><br><br>清除浏览器缓存再试一次，这次我们在console里调用window.applicationCache.update();，看看发生了什么：<br><br><img class="alignnone" src="http://tenny.qiniudn.com/appcache7.png" alt="" width="864" height="211"><br><br>updateready事件触发了，同样，appcache也更新了缓存，其中swapCache方法的意思是重新应用跟新后的缓存来替换原来的缓存！，到这里后基本的appcache也差不多了。<br><h3>注意事项：</h3><br><ul><br>    <li>站点离线存储的容量限制是5M</li><br>    <li>如果manifest文件，或者内部列举的某一个文件不能正常下载，整个更新过程将视为失败，浏览器继续全部使用老的缓存</li><br>    <li>引用manifest的html必须与manifest文件同源，在同一个域下</li><br>    <li>FALLBACK中的资源必须和manifest文件同源</li><br>    <li>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</li><br>    <li>站点中的其他页面即使没有设置manifest属性，请求的资源如果在缓存中也从缓存中访问</li><br>    <li>当manifest文件发生改变时，资源请求本身也会触发更新</li><br></ul><br>完！<br><br></div>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/index.php/archives/425/" data-id="cj24nfz7d000abf9ng28b4nhl" class="article-share-link" data-share="baidu" data-title="HTML5离线存储之Application Cache">分享到</a>
+      
+
+      <a href="http://yoursite.com/index.php/archives/425/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span> 次浏览</a>
+      <a href="http://yoursite.com/index.php/archives/425/#ds-thread" class="article-comment-link"><span class="dot">•</span>0 条评论</a>
+      
+      <a href="/index.php/archives/425/" class="article-date-l">
+  <time datetime="2014-08-28T08:50:58.000Z" itemprop="datePublished">2014-08-28</time>
+</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离线存储/">离线存储</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="index.php/archives/425/" data-title="HTML5离线存储之Application Cache" data-url="http://yoursite.com/index.php/archives/425/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <img style="width:100%;" src="https://oc5n93kni.qnssl.com/qunmingp.jpg" />
+    </div>
+  </div>
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+    <h3 class="widget-title-l">近期文章</h3>
+      <ul>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/698/">HTTP2.0关于多路复用的研究</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/690/">移动web之滚动篇</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/667/">线条之美，玩转SVG线条动画</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/651/">HTTP2 Server Push 研究</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/646/">号外！本博客已经全面升级HTTPS啦</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title-l">歸檔</h3>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <h3 class="widget-title-l">標簽</h3>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget tagcloud">
+      <h3 class="widget-title-l">標簽雲</h3>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <h3 class="widget-title-l">友情鏈接</h3>
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav style="display:none;" id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"nihaoshijie"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>

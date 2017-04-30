@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Web程序员学习iOS开发知识记录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言本文将已一个web开发者的角度来记录一些日常学习ios开发中踩过的坑和web前端与ios开发的知识对比，如果有ios大神看出什么不对的地方，还请指出哈。 正文1. ios开发要装xcode，而且没有什么其他更好的ide，这样做前端的我感觉很不习惯，每次修改完代码后都要点击运行，这比刷新浏览器慢多了。。">
+<meta name="keywords" content="ios">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web程序员学习iOS开发知识记录">
+<meta property="og:url" content="http://yoursite.com/index.php/archives/578/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言本文将已一个web开发者的角度来记录一些日常学习ios开发中踩过的坑和web前端与ios开发的知识对比，如果有ios大神看出什么不对的地方，还请指出哈。 正文1. ios开发要装xcode，而且没有什么其他更好的ide，这样做前端的我感觉很不习惯，每次修改完代码后都要点击运行，这比刷新浏览器慢多了。。">
+<meta property="og:image" content="http://7jpp2v.com1.z0.glb.clouddn.com/navigationbar.png">
+<meta property="og:image" content="http://7jpp2v.com1.z0.glb.clouddn.com/NavigationViews_2x.png">
+<meta property="og:updated_time" content="2017-04-27T13:35:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web程序员学习iOS开发知识记录">
+<meta name="twitter:description" content="前言本文将已一个web开发者的角度来记录一些日常学习ios开发中踩过的坑和web前端与ios开发的知识对比，如果有ios大神看出什么不对的地方，还请指出哈。 正文1. ios开发要装xcode，而且没有什么其他更好的ide，这样做前端的我感觉很不习惯，每次修改完代码后都要点击运行，这比刷新浏览器慢多了。。">
+<meta name="twitter:image" content="http://7jpp2v.com1.z0.glb.clouddn.com/navigationbar.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Web程序员学习iOS开发知识记录" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner ">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Web程序员学习iOS开发知识记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h2><span style="color: #008000;"><strong>前言</strong></span></h2><br>本文将已一个web开发者的角度来记录一些日常学习ios开发中踩过的坑和web前端与ios开发的知识对比，如果有ios大神看出什么不对的地方，还请指出哈。<p></p>
+<p></p><h2><span style="color: #008000;">正文</span></h2><br><strong>1</strong>. ios开发要装<span style="color: #3366ff;">xcode</span>，而且没有什么其他更好的ide，这样做前端的我感觉很不习惯，每次修改完代码后都要点击运行，这比刷新浏览器慢多了。。<br><a id="more"></a><br>&nbsp;<p></p>
+<p><strong>2</strong>. ios开发中，页面顶部的导航叫做navigationBar，这是ios里面自带的一种控件，不像web需要自己写div css来实现一个header栏，navigationBar的一本和navigationController配合使用，关于navigationController其实他并不是一个真正的页面，他是一个虚拟的用来管理页面跳转的组件，并不像一般的viewcontroller有这可以看到的对应的页面，跟navigationController类似的还有tabBarController</p>
+<p>&nbsp;</p>
+<p><strong>3</strong>. ios开发中每一个页面叫做一个viewController相当于web里面的html页面，其中<span style="color: #3366ff;">viewController</span>里面有<span style="color: #3366ff;">viewDidLoad</span>，<span style="color: #3366ff;">viewDidAppear</span>等方法，这些方法是viewController的生命周期方法，在这些方法里面可以写页面相关的逻辑，这有点类似与web里面window的onload方法或者domcument.ready方法，viewController里有一个view属性，这是一个大的父view，可以看做html的body标签，在这个属性里面可以添加一些子自定义的view。</p>
+<p>&nbsp;</p>
+<p><strong>4</strong>. ios开发中，最基本的ui元素是uiview，可以把它当作div，并且在ios中 布局都是绝对定位的absolute（和web里面的canvas布局类似），每一个ios的ui元素有一个属性叫做frame，这个属性包括x,y,width,heigt这四个值就可以确定一个元素在界面中的位置。</p>
+<p>&nbsp;</p>
+<p><strong>5</strong>.ios开发中，使用oc进行变成，可以将一些需要的依赖通过import的方式引入，import “”双引号一般表示引入自己写的一些文件，import &lt;&gt;尖括号标识引入系统的库例如uikit啥的，这个和nodejs里的require有些类似，但是又有一些区分，nodejs中require引入的依赖文件必须已module.export结尾，oc里面的import不必需要。</p>
+<p>&nbsp;</p>
+<p><strong>6</strong>.关于ios中的<span style="color: #3366ff;">navigationbar</span>，下面这张图表示的比较清晰<img class="alignnone" src="http://7jpp2v.com1.z0.glb.clouddn.com/navigationbar.png" alt="" width="640" height="174"></p>
+<p>&nbsp;</p>
+<p><strong>7</strong>. ios开发中，可以利用oc的宏定义一些全局的变量或者全局的方法，所谓宏就是一种特殊的语法，只要引入后，在oc的代码里都可以使用，可以理解成在window下挂一些变量和方法，使用起来比较方便，另外，由于定于宏的代码都放在一个 统一的文件里面，所以oc端想使用这个宏，必须引入他例如import “Define.h”,这个跟js相比还是比较麻烦的，不过也有解决办法，在xcode里面可以一个projectName-<span style="color: #222426;">Prefix.pch以pch结尾的文件。</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #222426;"><strong>8</strong>.pch全称是“<span style="color: #3366ff;">precompiled header</span>”，也就是预编译头文件，该文件里存放的工程中一些不常被修改的代码，比如常用的框架头文件，这样做的目的提高编译器编译速度。<span style="color: #000000;">假如pch中某个文件修改了，那么pch整个文件里包含的的其他文件也会重新编译一次，这样就会消耗大量时间，所以它里面添加的文件最好是是很少变动或不变动的头文件或者是预编译的代码片段：</span></span><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __IPHONE_4_0  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">warning</span> <span class="meta-string">"This project uses features only available in iOS SDK 4.0 and later."</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></div><div class="line">  </div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __OBJC__  </span></div><div class="line">    <span class="meta">#import &amp;lt;UIKit/UIKit.h&amp;gt;  </span></div><div class="line">    <span class="meta">#import &amp;lt;Foundation/Foundation.h&amp;gt;  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<p><strong>9</strong>. ios里面如果想显示一张图片并不像web那样简单，在web里，我们只用给img标签配置一个src即可，但是在ios客户端开发中，图片其实是一个文件，包括本地和网络图片，如果要想显示，我自己写逻辑将图片下载下来，然后将结果传给UIImage，但是这只是一个图片对象，还要将UIImage配置给UIImageView才能真正看到图片，当然ios已经有许多开源的图片下载库来简化我们这些操作例如AFNetworking等。</p>
+<p>&nbsp;</p>
+<p><strong>10</strong>. ios里关于图片有多个展示的类型，也就是说图片较大怎么居中截取，图片较小怎么拉伸都有相关的配置，这一点比web要丰富一些，web要想实现这些必须自己写逻辑代码实现，例如UIImageview的<a href="http://www.jianshu.com/p/338af5eb5c60" target="_blank">contentmode</a>属性</p>
+<p>其中主要分为:<span style="color: #3366ff;">ScaleToFill</span>,<span style="color: #3366ff;">ScaleAspectFit</span>,<span style="color: #3366ff;">ScaleAspectFill</span>三种。</p>
+<p>ScaleToFill为将图片按照整个区域进行拉伸(会破坏图片的比例)<br>ScaleAspectFit将图片等比例拉伸，可能不会填充满整个区域<br>ScaleAspectFill将图片等比例拉伸，会填充整个区域，但是会有一部分过大而超出整个区域。<br>至于Top,Left,Right等等就是将图片在view中的位置进行调整。</p>
+<p>&nbsp;</p>
+<p><strong>11</strong>. ios里实现页面跳转主要分为模态modal和入栈态push，具体思路就是找到将要<span style="color: #3366ff;">跳转</span>的页面的viewcontroller，new出来之后，调用</p>
+<p><strong><span class="s1">- (void)pushViewController:(<a style="color: #000000;" href="file:///Applications/Xcode.app/Contents/Developer/Documentation/DocSets/com.apple.adc.documentation.AppleiOS8.1.iOSLibrary.docset/Contents/Resources/Documents/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/doc/c_ref/UIViewController" target="_blank" rel="external"><span class="s2">UIViewController</span></a> *)viewController animated:(BOOL)animated</span></strong></p>
+<p><strong><span class="s1">- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion</span></strong></p>
+<p>来实现页面跳转，前者一般配合navigationController使用，后者则在一般的viewcongroller里面使用即可。</p>
+<p>&nbsp;</p>
+<p><strong>12</strong>. ios里面可以将一个view隐藏，调用view.hidden = true即可，但是跟web不同的是，隐藏的view同样占用这位置，同时，挨着被隐藏的view的兄弟view也并不会顶上来（占用隐藏view的位置）这一点和ios的绝对定位有关，所以如果用web的思想去隐藏和显示一个view在ios上会很麻烦，这里笔着曾经一度不能接受这样的转变，不能适应过来。。</p>
+<p>&nbsp;</p>
+<p><strong>13</strong>. ios里也有一个类似于web相对定位的东西叫做<a href="http://blog.csdn.net/sxfcct/article/details/8776928" target="_blank">autolayout</a>，这中开发方式完全抛弃了使用frame去定义一个view位置的方式，而且这个方式配合xib（<span style="color: #000000;">Interface Builder</span>），来构建页面的布局跟web很相似，所见即所得，我们在xcode里面直接将我们需要的组件拖入进来即可，同时可以定义view直接的约束，类似与web的margin padding 之类的限制条件，就可以很方便的布局和适配，具体可以参考<a href="http://www.cnblogs.com/WhoJun/p/3498408.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank">这个链接</a>。</p>
+<p><strong>14</strong>.<img class="alignnone" src="http://7jpp2v.com1.z0.glb.clouddn.com/NavigationViews_2x.png" alt="" width="977" height="986"></p>
+<p>上面这个图完美的表现了 底部tabbar，顶部navigationbar，viewcontroller，view的层次图，所以对于ios来说，很多组件系统都是提供的，并不像web很多组件要自己用div和css来实现。</p>
+<p>&nbsp;</p>
+<p><strong>15</strong>. 在ios中，如果使用的TabBarController（一种底部bar的viewController）这是一种特殊的controller，通过配置TabBarController的viewControllers属性就可以往这个TabBarController里面添加需要展示的页面，TabBarController会自己控制当点击哪一个tab时显示哪个页面，这点比web要智能很多，web要自己实现这种控件，而ios里面都已经实现了了。</p>
+<p>&nbsp;</p>
+<p><strong>16</strong>. 在含有TabBarController的页面中，当从这个页面跳转出去时，<span style="color: #3366ff;">必须手动把 底部tabba给隐藏掉</span>，这点一开始也是很不理解，不过理解下来，其实用了TabBarController时，整个页面都在这个页面里的那个区域内跳转，所以底部的bar是常驻的，因此要隐藏底部。</p>
+<p>&nbsp;</p>
+<p><strong>17.</strong> 关于ios里面的<span style="color: #3366ff;">重写</span>和<span style="color: #3366ff;">重载</span>，重写就是子类继承父类时，子类写一个方法和父类的方法名，参数，返回一样这样就是重写，重载就是在子类写两个相同的方法叫做重载，在viewController里会经常看到，viewDidLoad，viewDidAppear这类方法中经常看到[super viewDidLoad]这样调用父类的方法，原因是调用子类的方法时候 如果子类没有这个方法就会去父类找 所以如果不重写父类方法，不会影响到父类的调用，但是如果重写了方法，就不会去父类找 这个时候如果不再子类里面调用一下[super viewDidLoad]就会调用不到父类的默认方法了。</p>
+<p>&nbsp;</p>
+<p><strong>18.</strong>viewConfroller的<span style="color: #3366ff;">生命周期</span></p>
+<p style="color: #555555;"><strong>init</strong>－初始化程序</p><br><p style="color: #555555;"><strong>loadView- </strong>加载视图的view（通常这一步不需要去干涉）</p><br><p style="color: #555555;"><strong>viewDidLoad</strong>－加载视图（各种初始数据的载入，初始设定等很多内容，都会在这个方法中实现）</p><br><p style="color: #555555;"><strong>viewWillAppear</strong>－UIViewController对象的视图即将加入窗口时调用；（当APP有多个视图时，在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了）</p><br><p style="color: #555555;"><strong>viewDidApper</strong>－UIViewController对象的视图已经加入到窗口时调用；</p><br><p style="color: #555555;"><strong>viewWillDisappear</strong>－UIViewController对象的视图即将消失、被覆盖或是隐藏时调用；</p><br><p style="color: #555555;"><strong>viewDidDisappear</strong>－UIViewController对象的视图已经消失、被覆盖或是隐藏时调用；</p><br><p style="color: #555555;"><strong>viewVillUnload</strong>－当内存过低时，需要释放一些不需要使用的视图时，即将释放时调用；</p><br><p style="color: #555555;"><strong>viewDidUnload</strong>－当内存过低，释放一些不需要的视图时调用。</p><br><p style="color: #555555;"><strong>19.</strong>关于ios里的<span style="color: #222222;"><span style="color: #3366ff;">edgesForExtendedLayout</span>，<span style="color: #3366ff;">automaticallyAdjustsScrollViewInsets</span>，<span style="color: #3366ff;">translucent</span>，和navigationBar之间的关系其中：</span></p><br><p style="color: #555555;"><span style="color: #222222;">1 <span style="color: #3366ff;">translucent是navigationBar的属性优先级最高</span></span></p><br><p style="color: #555555;"><span style="color: #222222;">当translucent=true（默认）时，即在含有navigationBar的页面中，frame的0是从页面的statusBar开始算的。</span></p><br><p style="color: #555555;">当<span style="color: #222222;">translucent=false时，即在含有navigationBar的页面中，frame的0是从navigationBar下面开始算的。</span></p><br><p style="color: #555555;">2 <span style="color: #3366ff;">edgesForExtendedLayout是viewController的属性优先级其次</span></p><br><p style="color: #555555;">当<span style="color: #222222;">edgesForExtendedLayout=RectEdgeNone时，即在含有navigationBar的页面中，frame的0是从navigationBar下面开始算的。</span></p><br><p style="color: #555555;">当<span style="color: #222222;">edgesForExtendedLayout=RectEdgeAll（默认）时，即在含有navigationBar的页面中，frame的0是从statusBar开始算的。</span></p><br><p style="color: #555555;">3 <span style="color: #3366ff;">automaticallyAdjustsScrollViewInsets是viewController的属性，只对UIScrollView，UITableView有效</span></p><br><p style="color: #555555;">当automaticallyAdjustsScrollViewInsets<span style="color: #222222;">=true时，即在含有navigationBar的页面中，UIScrollView是从navigationBar底部开始滚动的，frame的0根据前两个属性影响。</span></p><br><p style="color: #555555;">当automaticallyAdjustsScrollViewInsets<span style="color: #222222;">=false时，即在含有navigationBar的页面中，UIScrollView是从本身的位置开始滚动的，frame的0根据前两个属性影响。</span></p><br><p style="color: #555555;">再设置<span style="color: #222222;">edgesForExtendedLayout和translucent时会影响viewController的view的高度，在viewDidLoad和viewWillAppear会有所体现。</span></p><br><p style="color: #555555;"></p><br><p style="color: #555555;"><span style="font-weight: bolder; line-height: 28.7999992370605px;">20.</span><span>关于<span style="color: #008080;">alloc init</span> 和 <span style="color: #008080;">new</span> 的区别，在oc中，创建一个对象经常是alloc init调用两个方法，其实oc也支持用new来创建对象的，这两个方法其实没什么区别，使用alloc init思路更清晰一些，先分配内存，然后返回实例对象，可以参考<a style="color: #336699;" href="http://stackoverflow.com/questions/719877/use-of-alloc-init-instead-of-new" target="_blank">stackoverflow</a>。</span></p><br><p style="color: #555555;"></p><br><p style="color: #555555;"><span style="font-weight: bold;">21.</span>appDelegate生命周期方法</p>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当应用程序将要进入非活动状态执行，在此期间，应用程序不接受消息或事件，比如来电  </span></div><div class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"应用程序将要进入非活动状态，即将进入后台"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//应用程序已经进入后台运行  </span></div><div class="line">- (<span class="keyword">void</span>)applicationDidEnterBackground:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"如果应用程序支持后台运行，则应用程序已经进入后台运行"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//应用程序将要进入活动状态执行  </span></div><div class="line">- (<span class="keyword">void</span>)applicationWillEnterForeground:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"应用程序将要进入活动状态，即将进入前台运行"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//应用程序已经进入活动状态  </span></div><div class="line">- (<span class="keyword">void</span>)applicationDidBecomeActive:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"应用程序已进入前台，处于活动状态"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//应用程序将要退出，通常用于保存书架喝一些推出前的清理工作，  </span></div><div class="line">- (<span class="keyword">void</span>)applicationWillTerminate:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"应用程序将要退出，通常用于保存书架喝一些推出前的清理工作"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//当设备为应用程序分配了太多的内存，操作系统会终止应用程序的运行，在终止前会执行这个方法  </span></div><div class="line"><span class="comment">//通常可以在这里进行内存清理工作，防止程序被终止  </span></div><div class="line">-(<span class="keyword">void</span>)applicationDidReceiveMemoryWarning:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"系统内存不足，需要进行清理工作"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//当系统时间发生改变时执行  </span></div><div class="line">-(<span class="keyword">void</span>)applicationSignificantTimeChange:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"当系统时间发生改变时执行"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//当程序载入后执行  </span></div><div class="line">-(<span class="keyword">void</span>)applicationDidFinishLaunching:(UIApplication *)application  </div><div class="line">&#123;  </div><div class="line">    NSLog(@<span class="string">"当程序载入后执行"</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<p></p><p style="color: #555555;">附上最近做的一个ios的demo：<a href="https://github.com/lvming6816077/wodu" target="_blank">https://github.com/lvming6816077/wodu</a></p><br><a href="http://www.cocoachina.com/bbs/read.php?tid=280826" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid=280826</a><p></p>
+<p>未完。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/index.php/archives/578/" data-id="cj24nfzac002ubf9n7119avjq" class="article-share-link" data-share="baidu" data-title="Web程序员学习iOS开发知识记录">分享到</a>
+      
+
+      <a href="http://yoursite.com/index.php/archives/578/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span> 次浏览</a>
+      <a href="http://yoursite.com/index.php/archives/578/#ds-thread" class="article-comment-link"><span class="dot">•</span>0 条评论</a>
+      
+      <a href="/index.php/archives/578/" class="article-date-l">
+  <time datetime="2016-03-01T11:25:22.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="index.php/archives/578/" data-title="Web程序员学习iOS开发知识记录" data-url="http://yoursite.com/index.php/archives/578/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <img style="width:100%;" src="https://oc5n93kni.qnssl.com/qunmingp.jpg" />
+    </div>
+  </div>
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+    <h3 class="widget-title-l">近期文章</h3>
+      <ul>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/698/">HTTP2.0关于多路复用的研究</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/690/">移动web之滚动篇</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/667/">线条之美，玩转SVG线条动画</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/651/">HTTP2 Server Push 研究</a>
+          </li>
+        
+          <li class="recent-li">
+            <a href="/index.php/archives/646/">号外！本博客已经全面升级HTTPS啦</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title-l">歸檔</h3>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <h3 class="widget-title-l">標簽</h3>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget tagcloud">
+      <h3 class="widget-title-l">標簽雲</h3>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    
+    <div class="widget">
+      <h3 class="widget-title-l">友情鏈接</h3>
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav style="display:none;" id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"nihaoshijie"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
