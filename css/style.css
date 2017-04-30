@@ -1252,11 +1252,12 @@ a.article-title:hover {
 .article-entry .highlight {
   background: #2d2d2d;
   margin: 0;
-  padding: 15px 20px;
+  padding: 5px 20px;
   overflow: auto;
   color: #ccc;
   line-height: 22.400000000000002px;
   border-radius: 4px;
+  font-size: 13px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
