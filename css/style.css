@@ -1093,7 +1093,7 @@ a.article-title:hover {
 .list p:empty {
   display: none;
 }
-.join-counr {
+.join-count {
   color: #e32d40 !important;
 }
 .view-count {
