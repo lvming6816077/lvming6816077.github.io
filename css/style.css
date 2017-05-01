@@ -1094,6 +1094,7 @@ a.article-title:hover {
   display: none;
 }
 .join-count {
+  font-size: 14px;
   color: #e32d40 !important;
 }
 .view-count {
