@@ -219,57 +219,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>借助着五一假期，对自己的博客好好整理了一下，从wordpress迁移到了hexo+github了，忽然感觉hexo大法好啊！</p>
+<p>用了3年的博客，是时候对自己的博客好好整理了一下，从wordpress迁移到了hexo+github了，忽然感觉hexo大法好啊！</p>
 </blockquote>
-<h4 id="1-为啥要迁移博客"><a href="#1-为啥要迁移博客" class="headerlink" title="1.为啥要迁移博客?"></a>1.为啥要迁移博客?</h4><ul>
-<li>从2014年开始写博客之后，都是运行在wordpress上的，当时刚接触php，对wordpress热情很高，也尝试过自己写wordpress主题，但是无奈不会设计，最终还是放弃了。</li>
-<li>之前利用wordpress博客时部署在香港的vps上的，200块一年（没钱买阿里云或者腾讯云），所以速度很慢，首屏的时间很长，体验不好。</li>
-<li>wordpress本事也显得较为笨重，也不是说wordpress不好，但用久了总想尝试一些新的东西。</li>
-<li>在加上身为一个前端工程师无法长期忍受菊花时间所以就萌生了迁移博客的想法，遂开始实践。</li>
-</ul>
-<h4 id="2-迁移策略"><a href="#2-迁移策略" class="headerlink" title="2.迁移策略"></a>2.迁移策略</h4><ul>
-<li>想放弃wordpress之前也找了一些其他的替代最后筛选下来剩下<a href="http://jekyll.com.cn/" target="_blank" rel="external">jekyll</a>,<a href="https://hexo.io/" target="_blank" rel="external">hexo</a>这两个选择。<ul>
-<li>jekyll和hexo都是基于静态的博客服务，就是说不需要后台数据库跟wordpress有很大区别，完全纯前端实现。md文件实现。</li>
-<li>jekyll基于ruby，hexo基于nodejs。</li>
-<li>hexo本地调试较jekyll方便很多，直接本地起一个node服务，前端学习成本低。</li>
-<li>hexo主题比较多。</li>
-</ul>
-</li>
-<li>所以最终选择的hexo。</li>
-<li>借助GitPage和hexo这两个黄金搭配，最终确认了迁移策略。</li>
-</ul>
-<h4 id="3-如何迁移"><a href="#3-如何迁移" class="headerlink" title="3.如何迁移"></a>3.如何迁移</h4><ul>
-<li><p>关于hexo＋GitPage快速生成博客的教程，网上已经有大把大把的了，所以我这里就不具体说了，说一下遇到的一些问题。</p>
-<ol>
-<li><p>迁移博客最大的难点在于如何保证迁移前后的文章链接固定，由于之前的wordpress采用的是index.php+archives+文章id的方式来构建的，所以在利用静态文件时要想办法构造出这个链接，好在hexo提供了<a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="external">Front-matter</a>的方式,巧妙的利用了category来配置id实现了这个链接。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">permalink: index.php/archives/:category/</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: 吕小鸣博客搬家记</div><div class="line">date: 2017-05-01 18:30:23</div><div class="line">categories:</div><div class="line">- 700</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>hexo官方提供了wordpress文章迁移到hexo生成md文件的<a href="https://hexo.io/docs/migration.html#WordPress" target="_blank" rel="external">插件</a>,但是对于我之前的博客基本上时用不了的，毕竟之前的博客文章代码太乱，就算生成好了也要一个一个改，所以便做了一个艰难的决定，自己手工来改。</p>
-</li>
-<li>看了一下我的所有博客，整整50篇，遂挑选了一些有必要改的来手工改，毕竟从2014年时写的文章有些也比较小白，不迁移也行。</li>
-<li>按照官方文档上的步骤将hexo的文章建立了起来，同时将静态文件上传到Github的GitPage上托管，方便很多，在也不用下个ftp工具在服务器上改wordpress代码了。</li>
-</ul>
-<h4 id="4-辅助插件的选择"><a href="#4-辅助插件的选择" class="headerlink" title="4.辅助插件的选择"></a>4.辅助插件的选择</h4><ul>
-<li>之前用的多说第三方评论插件在5月底就要到期了，说实话多说插件用了很久，感觉还是很不错的，无奈即将无法使用，还是有些遗憾的了。</li>
-<li>hexo默认集成了<a href="http://www.disqus.com/" target="_blank" rel="external">Disqus</a>社交评论插件，但是Disqus毕竟时国外的，很多登录账户还是需要twtter或者faceboox才能登录，而且速度比较慢，在国内用的还是少，所以没有使用这个插件。</li>
-<li>大概找了 <a href="http://www.uyan.cc/" target="_blank" rel="external">有言</a>，<a href="http://changyan.kuaizhan.com/" target="_blank" rel="external">搜狐畅聊</a>，<a href="https://gentie.163.com/info.html" target="_blank" rel="external">网易云跟帖</a> 三种评论插件之后，最终选择了 网易云跟帖,怎么说呢，比较合我的胃口。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cloudTieConfig = &#123;</div><div class="line">  <span class="attr">url</span>: <span class="built_in">document</span>.location.href.replace(<span class="string">'https'</span>,<span class="string">''</span>).replace(<span class="string">'http'</span>,<span class="string">''</span>),</div><div class="line">  <span class="attr">sourceId</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">productKey</span>: <span class="string">"eb0b276c0f00410db0322e1a9a9b8bbc"</span>,</div><div class="line">  <span class="attr">target</span>: <span class="string">"cloud-tie-wrapper"</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> yunManualLoad = <span class="literal">true</span>;</div><div class="line">Tie.loader(<span class="string">"aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s"</span>, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这里有一个技巧，为了防止以后博客评论可以随着文章链接迁移，特地将https和http的唯一标识去掉了。</p>
-<h4 id="5-自定义域名使用https"><a href="#5-自定义域名使用https" class="headerlink" title="5.自定义域名使用https"></a>5.自定义域名使用https</h4><ul>
-<li>在使用了GitPage之后域名默认时username.github.io想要修改成自己的域名并不难，在你域名的dns解析面板上修改解析规则到github的ip即可，同时在source上调价CNAME文件，具体细节网上有很多教程。</li>
-<li>但是难点在于将自己的自定义域名增加https的支持，在什么都不改的情况下访问https的网页会报一个<br><img src="https://oc5n93kni.qnssl.com/blogA262222C-9392-4F08-BF75-A8E937E58DC8.png" alt="">错误，意思就是github的证书不能应用在你自定义的域名上。</li>
-<li>在网上找了解决办法采用<a href="https://www.cloudflare.com/" target="_blank" rel="external">Cloudflare</a>代理的方式来实现https访问，原理就是<br><img src="https://oc5n93kni.qnssl.com/blog/513492664b24d.jpg" alt=""></li>
-<li>简单来说就是Cloudflare注册成功之后Cloudflare会提供给你2个dns服务器地址，修改你的域名的dns解析的服务器成这两个地址，Cloudflare在平台上免费部署了ssl，所以以后的域名解析都在cloudflare上托管了。</li>
-<li>这个折腾起来还是很复杂的，再加上家里网速访问Cloudflare太慢，至今还没有完全部署成https，以后在继续研究。</li>
-</ul>
-<p><strong>总之，博客迁移完成之后还是很有成就感的，后续会继续优化一个博客主题，让博客变得更炫目一些！</strong></p>
-<hr>
-<p>本博客使用的主题是在 <a href="https://github.com/xiangming/landscape-plus" target="_blank" rel="external">Landscape-plus</a>的基础上修改的。</p>
-
+<h4 id="1-为啥要迁移博客"><a href="#1-为啥要迁移博客" class="headerlink" title="1.为啥要迁移博客?"></a>1.为啥要迁移博客?</h4>
+        
+          <p class="article-more-link">
+            <a href="/index.php/archives/700/#more">阅读全文</a>
+          </p>
+        
       
     </div>
 
