@@ -636,6 +636,10 @@ a.article-title:hover {
 .article-entry:after {
   clear: both;
 }
+.article-entry li {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 .article-entry p,
 .article-entry table {
   line-height: 1.6em;
@@ -1093,6 +1097,13 @@ a.article-title:hover {
 .list br:empty,
 .list p:empty {
   display: none;
+}
+.join-counr {
+  color: #e32d40 !important;
+}
+.view-count {
+  color: #e32d40;
+  font-size: 14px;
 }
 #comments {
   background: #fff;
