@@ -676,6 +676,8 @@ a.article-title:hover {
   height: auto;
   display: block;
   margin: auto;
+  margin-top: 17px;
+  margin-bottom: 17px;
 }
 .article-entry iframe {
   border: none;
