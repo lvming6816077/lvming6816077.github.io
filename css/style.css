@@ -1497,7 +1497,7 @@ pre .javascript .function {
   -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.2);
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   padding: 15px;
-  padding-top: 10px;
+  padding-bottom: 8px;
   border-radius: 3px;
 }
 .widget a {
@@ -1519,6 +1519,22 @@ pre .javascript .function {
 .widget dl dl {
   margin-left: 15px;
   list-style: disc;
+}
+.ac-conf {
+  position: relative;
+}
+.ac-conf:before {
+  content: '';
+  width: 50px;
+  height: 62px;
+  position: absolute;
+  -webkit-background-size: 68% 68%;
+  -moz-background-size: 68% 68%;
+  background-size: 68% 68%;
+  background-repeat: no-repeat;
+  left: 30px;
+  top: 19px;
+  background-image: url("https://oc5n93kni.qnssl.com/hot-32d141.png");
 }
 .widget {
   line-height: 1.6em;
