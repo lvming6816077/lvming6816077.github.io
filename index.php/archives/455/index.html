@@ -109,7 +109,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/455/" data-id="cj3133qm5004flo9nziusig0g" class="article-share-link" data-share="baidu" data-title="移动web问题小结">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/455/" data-id="cj32gtv7d0023h09np8yc7ij2" class="article-share-link" data-share="baidu" data-title="移动web问题小结">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/455/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -374,6 +374,7 @@
 <script>
 function showCount (Counter){
   var query=new AV.Query(Counter);
+  var fakeCount = 500;
   query.find({
     success: function(results){
 
@@ -382,11 +383,9 @@ function showCount (Counter){
                 var counter=results[i];
                 var url=counter.get("url");
                 var time=counter.get("time");
-                // add to the popularlist widget
-                // showcontent=title+" ("+time+")";
-                //notice the "" in href
+
                 try {
-                  $('#'+url+'learnCount').text(time);
+                  $('#'+url+'learnCount').text(parseInt(time)+fakeCount);
                 }catch(e){}
                 
             }

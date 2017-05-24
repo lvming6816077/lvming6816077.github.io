@@ -528,6 +528,7 @@
 <script>
 function showCount (Counter){
   var query=new AV.Query(Counter);
+  var fakeCount = 500;
   query.find({
     success: function(results){
 
@@ -536,11 +537,9 @@ function showCount (Counter){
                 var counter=results[i];
                 var url=counter.get("url");
                 var time=counter.get("time");
-                // add to the popularlist widget
-                // showcontent=title+" ("+time+")";
-                //notice the "" in href
+
                 try {
-                  $('#'+url+'learnCount').text(time);
+                  $('#'+url+'learnCount').text(parseInt(time)+fakeCount);
                 }catch(e){}
                 
             }
