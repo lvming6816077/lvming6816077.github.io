@@ -388,9 +388,10 @@
 <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
 <script>AV.init({appId:"yqwM1H3ohsqaUqxBa2balXfY-gzGzoHsz", appKey:"gE3VrJwiTB3lfORQlaUvi2RO"});</script>
 <script>
+  var fakeCount = 500;
 function showCount (Counter){
   var query=new AV.Query(Counter);
-  var fakeCount = 500;
+
   query.find({
     success: function(results){
 
@@ -431,7 +432,7 @@ function addCount (Counter) {
 
                 counter.save();
 
-                $('#'+url+'learnCount').text(counter.get("time"));
+                $('#'+url+'learnCount').text(parseInt(counter.get("time"))+fakeCount);
             }
             else
             {

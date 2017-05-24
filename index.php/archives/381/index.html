@@ -105,7 +105,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/381/" data-id="cj32gtv6f0011h09nfbvcfij5" class="article-share-link" data-share="baidu" data-title="requireJS实现原理研究1">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/381/" data-id="cj32gxpyv0010hw9ndhrt76nz" class="article-share-link" data-share="baidu" data-title="requireJS实现原理研究1">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/381/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -368,9 +368,10 @@
 <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
 <script>AV.init({appId:"yqwM1H3ohsqaUqxBa2balXfY-gzGzoHsz", appKey:"gE3VrJwiTB3lfORQlaUvi2RO"});</script>
 <script>
+  var fakeCount = 500;
 function showCount (Counter){
   var query=new AV.Query(Counter);
-  var fakeCount = 500;
+
   query.find({
     success: function(results){
 
@@ -411,7 +412,7 @@ function addCount (Counter) {
 
                 counter.save();
 
-                $('#'+url+'learnCount').text(counter.get("time"));
+                $('#'+url+'learnCount').text(parseInt(counter.get("time"))+fakeCount);
             }
             else
             {
