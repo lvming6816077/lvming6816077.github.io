@@ -352,8 +352,6 @@ function(e, t) {
             try { / (\d + \.\d + ) / .test(external.max_version) && (n.maxthon = +RegExp.$1)
             } catch(r) {}
             switch (!0) {
-            case / msie(\d + \.\d + ) / i.test(e) : n.ie = document.documentMode || +RegExp.$1;
-                break;
             case / chrome\ / (\d + \.\d + ) / i.test(e) : n.chrome = +RegExp.$1;
                 break;
             case / (\d + \.\d) ? ( ? :\.\d) ? \s + safari\ / ?(\d + \.\d + ) ? /i.test(e)&&!/chrome / i.test(e) : n.safari = +(RegExp.$1 || RegExp.$2);
