@@ -130,7 +130,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/149/" data-id="cj4dyq09e000jmk9nyr25td01" class="article-share-link" data-share="baidu" data-title="Javascript基本概念梳理">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/149/" data-id="cj4e1u2r4000jqu9nwaolfpsk" class="article-share-link" data-share="baidu" data-title="Javascript基本概念梳理">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/149/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -374,7 +374,10 @@
     "common":{onBeforeClick: SetShareData},
     "share":{"bdCustomStyle":"/css/bdshare.css"}
   };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+  if (window.location.href.indexOf('archives') > -1) {
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+  }
+  
 </script>
 
 <!-- 百度分享 end -->

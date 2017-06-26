@@ -125,7 +125,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/115/" data-id="cj4dyq08m0002mk9nlh7ktupq" class="article-share-link" data-share="baidu" data-title="Canvas制作 撞球游戏 简单易学">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/115/" data-id="cj4e1u2q50002qu9n54w72edz" class="article-share-link" data-share="baidu" data-title="Canvas制作 撞球游戏 简单易学">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/115/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -369,7 +369,10 @@
     "common":{onBeforeClick: SetShareData},
     "share":{"bdCustomStyle":"/css/bdshare.css"}
   };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+  if (window.location.href.indexOf('archives') > -1) {
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+  }
+  
 </script>
 
 <!-- 百度分享 end -->
