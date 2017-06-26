@@ -352,11 +352,11 @@ function(e, t) {
             try { / (\d + \.\d + ) / .test(external.max_version) && (n.maxthon = +RegExp.$1)
             } catch(r) {}
             switch (!0) {
-            case / chrome\ / (\d + \.\d + ) / i.test(e) : n.chrome = +RegExp.$1;
+            case ;
                 break;
-            case / (\d + \.\d) ? ( ? :\.\d) ? \s + safari\ / ?(\d + \.\d + ) ? /i.test(e)&&!/chrome / i.test(e) : n.safari = +(RegExp.$1 || RegExp.$2);
+            case ;
                 break;
-            case / firefox\ / (\d + \.\d + ) / i.test(e) : n.firefox = +RegExp.$1;
+            case ;
                 break;
             case / opera( ? :\ / |)(\d + ( ? :\.\d + ) ? )(. + ?(version\ / (\d + ( ? :\.\d + ) ? ))) ? /i.test(e):n.opera=+(RegExp.$4||RegExp.$1)}return t.extend(t,n),n}(),t.id=function(){var e=t.global("_maps_id"),n=t.key;return window[t.guid]._counter=window[t.guid]._counter||1,function(r,i){var s,o=t.isString(r),u=t.isObject(r),a=u?r[n]:o?r:"";if(t.isString(i))switch(i){case"get":return u?a:e[a];case"remove":case"delete":if(s=e[a])t.isElement(s)&&t.browser.ie<8?s.removeattribute(n):delete s[n],delete="" e[a];return="" a;default:return="" o?((s="e[a])&&delete" e[a],s&&(e[s[n]="i]=s)):u&&(a&&delete" e[a],e[r[n]="i]=r),i}return" u?(!a&&(e[r[n]="a=t.id()]=r),a):o?e[r]:"TANGRAM_"+t._global_._counter++}}(),t._util_=t._util_||{},t._util_.support=t._util_.support||function(){var" e="document.createElement("div"),t,n,r,i,s;return" e.setattribute("classname","t"),e.innerhtml=" <link/ > <table ></table><a href="/a ">a</a><input type="checkbox "/>" ,n="e.getElementsByTagName("A" ")[0],n.style.csstext="top: 1px;
                 float: left;
