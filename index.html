@@ -203,6 +203,89 @@
 
 
   
+    <article id="post-百度分享HTTPS折腾记" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner list">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/index.php/archives/701/">百度分享HTTPS折腾记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>百度分享很坑！！</p>
+</blockquote>
+<h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><p>今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看：<br><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png" alt=""></p>
+<h5 id="这是什么鬼！"><a href="#这是什么鬼！" class="headerlink" title="这是什么鬼！"></a>这是什么鬼！</h5><p>忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。<br><a href="https://www.hrwhisper.me/baidu-share-not-support-https-solution/" target="_blank" rel="external">参考这篇教程</a></p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：</p>
+<ol>
+<li>这些文件都是被压缩的，想要直接修改还需要将文件反压缩一下。</li>
+<li>找到出错文件share.js，出错原因大概是语法错误，因为不知道逻辑，所以将出错的代码行删掉了。</li>
+<li>原本天真的以为万事大吉，谁知刷新之后🈶又出现两个新的错误。</li>
+</ol>
+<p><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png" alt=""></p>
+<h5 id="这又是什么鬼？"><a href="#这又是什么鬼？" class="headerlink" title="这又是什么鬼？"></a>这又是什么鬼？</h5><p>难道百度源码都是没有测试过的么？？</p>
+<ol>
+<li>找到出问题的文件tangram.js,代码又是被压缩的，找到出问题代码fix之。</li>
+<li>找到出问题的文件view_base.js,代码又是被压缩的，找到出问题代码fix之。</li>
+<li>刷新一看，尼玛怎么又冒出新的错误？<br><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png" alt=""></li>
+</ol>
+<h5 id="心累。。"><a href="#心累。。" class="headerlink" title="心累。。"></a>心累。。</h5><p>于是又开始想别的办法，发誓不在修改百度分享的源码了。。</p>
+<h3 id="完美解决"><a href="#完美解决" class="headerlink" title="完美解决"></a>完美解决</h3><p>经过一系列的查找的求助，终于找到了完美的结局办法：</p>
+<ol>
+<li>百度分享的js源码其实也有部署在百度的另外一个支持https的cdn上即：<a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js" target="_blank" rel="external"></a>.</li>
+<li>利用这个cdn的url同样可以得到其他js源码文件的地址：<br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js</a><br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js</a></li>
+<li>将原本的bdimg.share.baidu.com修改为ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv，同时将http换成https即可。</li>
+<li>但这并没有结束如果只改了share.js 这个js里面引入其他js同样会是http的，所以还需要将share.js inline到script标签里面，同时修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jscfg:&#123;<span class="attr">domain</span>:&#123;<span class="attr">staticUrl</span>:<span class="string">"https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/"</span>&#125;&#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>将用于模块化加载的js的地址也替换成新的。</p>
+<h4 id="大功告成！"><a href="#大功告成！" class="headerlink" title="大功告成！"></a>大功告成！</h4>
+      
+    </div>
+
+    <footer class="article-footer">
+      
+
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span class="view-count" id="indexphparchives701learnCount">0</span> 次浏览</a>
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/701/" data-sourceId="">0</span>
+      
+      条评论</a>
+      
+      <a href="/index.php/archives/701/" class="article-date-l">
+  <time datetime="2017-06-26T14:48:20.000Z" itemprop="datePublished">2017-06-26</time>
+</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bdshare/">bdshare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  <!-- JavaScript 配置 -->
+<script>var yunModuleEnv = true;</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+<script>
+  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
+  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
+</script>
+
+
+
+  
     <article id="post-吕小鸣博客搬家记" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner list">
@@ -649,74 +732,6 @@
 
 
   
-    <article id="post-H5视频直播扫盲" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner list">
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    <div style="background-image:url(https://oc5n93kni.qnssl.com/1-1604251R0335K.jpg);" class="post-pic"></div>
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/index.php/archives/615/">H5视频直播扫盲</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>视频直播这么火，再不学就out了。</p>
-<p>为了紧跟潮流，本文将向大家介绍一下视频直播中的基本流程和主要的技术点，包括但不限于前端技术。</p>
-<p><h2><strong>1 H5到底能不能做视频直播？</strong></h2><br>当然可以， H5火了这么久，涵盖了各个方面的技术。<br>
-        
-          <p class="article-more-link">
-            <a href="/index.php/archives/615/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      
-
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/615/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span class="view-count" id="indexphparchives615learnCount">0</span> 次浏览</a>
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/615/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/615/" data-sourceId="">0</span>
-      
-      条评论</a>
-      
-      <a href="/index.php/archives/615/" class="article-date-l">
-  <time datetime="2016-05-25T13:04:19.000Z" itemprop="datePublished">2016-05-25</time>
-</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视频直播/">视频直播</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  <!-- JavaScript 配置 -->
-<script>var yunModuleEnv = true;</script>
-<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-<script>
-  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
-  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
-</script>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -735,15 +750,15 @@
       <p class="desc">实践过，才懂得</p>
       <div class="post-info">
         <div class="info-inner">
-          <div class="info-num">28</div>
+          <div class="info-num">29</div>
           <div class="info-name">文章</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">18</div>
+          <div class="info-num">19</div>
           <div class="info-name">分类</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">29</div>
+          <div class="info-num">30</div>
           <div class="info-name">标签</div>
         </div>
       </div>
@@ -775,6 +790,10 @@
       <ul>
         
           <li class="recent-li">
+            <a href="/index.php/archives/701/">百度分享HTTPS折腾记</a>
+          </li>
+        
+          <li class="recent-li">
             <a href="/index.php/archives/700/">吕小鸣博客搬家记Hexo</a>
           </li>
         
@@ -790,10 +809,6 @@
             <a href="/index.php/archives/667/">线条之美，玩转SVG线条动画</a>
           </li>
         
-          <li class="recent-li">
-            <a href="/index.php/archives/651/">HTTP2 Server Push 研究</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -803,7 +818,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title-l">归档</h3>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -813,7 +828,7 @@
     
     <div class="widget">
       <h3 class="widget-title-l">标签</h3>
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bdshare/">bdshare</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -823,7 +838,7 @@
     
     <div class="widget tagcloud">
       <h3 class="widget-title-l">标签云</h3>
-      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/bdshare/" style="font-size: 10px;">bdshare</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -926,6 +941,8 @@
     "common":{onBeforeClick: SetShareData},
     "share":{"bdCustomStyle":"/css/bdshare.css"}
   };
+
+  
 
 </script>
 

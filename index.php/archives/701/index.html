@@ -4,32 +4,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>web前端性能优化之Html Css Javascript | 吕小鸣前端博客</title>
+  <title>百度分享HTTPS折腾记 | 吕小鸣前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言 html css javascript可以算是前端必须掌握的东西了，但是我们的浏览器是怎样解析这些东西的呢 我们如何处理html css javascript这些东西来让我们的网页更加合理，在我这里做了一些实验，总结起来给大家看看。">
-<meta name="keywords" content="移动web,性能优化">
+  <meta name="description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。参考这篇教程 解决问题但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：  这些文件都是被压缩的">
+<meta name="keywords" content="hexo,bdshare">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web前端性能优化之Html Css Javascript">
-<meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/530/index.html">
+<meta property="og:title" content="百度分享HTTPS折腾记">
+<meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/701/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
-<meta property="og:description" content="前言 html css javascript可以算是前端必须掌握的东西了，但是我们的浏览器是怎样解析这些东西的呢 我们如何处理html css javascript这些东西来让我们的网页更加合理，在我这里做了一些实验，总结起来给大家看看。">
-<meta property="og:image" content="http://cdn.alloyteam.com/wp-content/uploads/2015/04/11.png">
-<meta property="og:image" content="http://www.alloyteam.com/wp-content/uploads/2015/04/2.png">
-<meta property="og:image" content="http://www.alloyteam.com/wp-content/uploads/2015/04/3.png">
-<meta property="og:image" content="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/4.png">
-<meta property="og:image" content="http://www.alloyteam.com/wp-content/uploads/2015/04/51.png">
-<meta property="og:image" content="http://www.alloyteam.com/wp-content/uploads/2015/05/6.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx1.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx2.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx3.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx4.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx5.png">
-<meta property="og:image" content="http://1.lvming6816077.sinaapp.com/testaa/xx6.png">
-<meta property="og:updated_time" content="2017-04-30T09:25:07.000Z">
+<meta property="og:description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。参考这篇教程 解决问题但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：  这些文件都是被压缩的">
+<meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
+<meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png">
+<meta property="og:image" content="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png">
+<meta property="og:updated_time" content="2017-06-27T08:00:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web前端性能优化之Html Css Javascript">
-<meta name="twitter:description" content="前言 html css javascript可以算是前端必须掌握的东西了，但是我们的浏览器是怎样解析这些东西的呢 我们如何处理html css javascript这些东西来让我们的网页更加合理，在我这里做了一些实验，总结起来给大家看看。">
-<meta name="twitter:image" content="http://cdn.alloyteam.com/wp-content/uploads/2015/04/11.png">
+<meta name="twitter:title" content="百度分享HTTPS折腾记">
+<meta name="twitter:description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。参考这篇教程 解决问题但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：  这些文件都是被压缩的">
+<meta name="twitter:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
@@ -92,7 +83,7 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-web前端性能优化之Html-Css-Javascript" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-百度分享HTTPS折腾记" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner ">
     
@@ -101,7 +92,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      web前端性能优化之Html Css Javascript
+      百度分享HTTPS折腾记
     </h1>
   
 
@@ -109,122 +100,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong><span style="color: #008080;">前言</span></strong></p>
-<p>html css javascript可以算是前端必须掌握的东西了，但是我们的浏览器是怎样解析这些东西的呢 我们如何处理html css javascript这些东西来让我们的网页更加合理，在我这里做了一些实验，总结起来给大家看看。</p>
-<a id="more"></a>
-<p><strong><span style="color: #008080;">最简单的页面</span></strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"download-button.png"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>我们打开chrome的控制台查看timeline</p>
-<p><img class="alignnone" src="http://cdn.alloyteam.com/wp-content/uploads/2015/04/11.png" alt="" width="1073" height="142"></p>
-<p>由上图 可得结论</p>
-<p>1 图中蓝色透明条标识浏览器从发起请求到接收到服务器返回第一个字节的时间，时间还是挺长的，而蓝色实体条则为真正的html页面下载的时间 还是很短的。</p>
-<p>2 图中红框内的这部分时间则表示浏览器从下载完成html之后开始构建dom，当发现一个image标签时所花费的时间，由此可见dom是顺序执行的，当发现image时便立即发起请求，而紫色透明条则是image发起请求时在网络传输时所消耗的时间。</p>
-<p>3 图中timeline蓝色竖线所处的时间为domComplete时间，红色竖线为dom的onload时间，由此可见两种事件的差异。而浏览器构建dom树所花费的时间可以算出即domComplete时间 减去 html下载完成后的时间大概80ms。</p>
-<p><strong><span style="color: #008080;">含有css的页面</span></strong></p>
-<p><pre class="lang:default decode:true  ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>    &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>我们打开chrome的控制台查看timeline</p>
-<p><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/2.png"><img class="alignleft wp-image-623 size-full" src="http://www.alloyteam.com/wp-content/uploads/2015/04/2.png" alt="2" width="1072" height="196"></a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>1 在添加了外部引入css之后，并没有发现什么异常，但是有一点指的注意，也就是红色竖线和蓝色竖线挨得更进了，这表明domComplete时间必须等待css解析完成，也就是构建dom树必须等待css解析完成，这也就解释了下图</p>
-<p><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/3.png"><img class="alignnone wp-image-624 size-full" src="http://www.alloyteam.com/wp-content/uploads/2015/04/3.png" alt="3" width="734" height="348"></a></p>
-<p>&nbsp;</p>
-<hr>
-
-<p><strong><span style="color: #008080;">含有javascript和css的页面</span></strong></p>
-<p><pre class="lang:default decode:true ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;script type=”text/javascript” src=”H5FullscreenPage.js”&gt;&lt;/script&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p>我们打开chrome的控制台查看timeline</p>
-<p><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/4.png"><img class="alignnone size-full wp-image-625" src="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/4.png" alt="4" width="1221" height="227"></a></p>
-<p>&nbsp;</p>
-<p>1 图上显示在引入外部的js文件之后domComplete时间又被延后了，结合上面的renderTree，由于javascript代码可能会更改css属性或者是dom结构，所以在形成renderTree之前必须等待javascript解析完成才能接着构建renderTree。</p>
-<p>2 将javascript放在head内和body底部的区别也在于此，放在head里面，由于浏览器发现head里面有javascript标签就会暂时停止其他渲染行为，等待javascript下载并执行完成才能接着往下渲染，而这个时候由于在head里面这个时候页面是白的，如果将javascript放在页面底部，renderTree已经完成大部分，所以此时页面有内容呈现，即使遇到javascript阻塞渲染，也不会有白屏出现。</p>
-<hr>
-
-<p><strong><span style="color: #008080;">内嵌javascript的页面</span></strong></p>
-<p>&nbsp;</p>
-<p><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/51.png"><img class="alignnone size-full wp-image-626" src="http://www.alloyteam.com/wp-content/uploads/2015/04/51.png" alt="51" width="1222" height="213"></a></p>
-<p>1 图上可以看到，由于内嵌了javascript，页面上减少了一个请求，导致html文档变大，消耗时间增多，但是domComplete时间提升的并不多。</p>
-<hr>
-
-<p><span style="color: #008080;"><strong>使用async的javascript</strong></span></p>
-<p><pre class="lang:default decode:true">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>      &lt;script async src=”H5FullscreenPage.js” type =”text/javascript” &gt;&lt;/script &gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p><a href="http://www.nihaoshijie.com.cn/wp-content/uploads/2015/05/6.png"><img class="alignnone size-full wp-image-627" src="http://www.alloyteam.com/wp-content/uploads/2015/05/6.png" alt="6" width="1215" height="348"></a></p>
-<p>1 可以看到domComplete时间被大大提前 javascript也没有阻塞css和body里面img元素的并行下载。</p>
-<p>2 使用<a href="http://www.w3school.com.cn/tags/att_script_async.asp" target="_blank" rel="external">async</a>标识的script，浏览器将异步执行这中script不会阻塞正常的dom渲染，这时html5所支持的属性，另外<a href="http://www.w3school.com.cn/tags/att_script_defer.asp" target="_blank" rel="external">defer</a>也可以达到这种效果。</p>
-<hr>
-
-<p><strong><span style="color: #008080;">head里面js和css加载的关系</span></strong></p>
-<p><strong>外联js在css前面</strong></p>
-<p><pre class="lang:default decode:true">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;script src=”H5FullscreenPage.js” type =”text/javascript” &gt;&lt;/script &gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br><img class="alignnone" style="height: 442px; width: 1221px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx1.png" alt=""></p>
-<p>1 没有阻止css的并行加载但是影响了body里面img的并行加载</p>
-<hr>
-
-<p><strong>外联js在css中间</strong></p>
-<p><pre class="lang:default decode:true">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;script src=”H5FullscreenPage.js” type =”text/javascript” &gt;&lt;/script &gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br><img class="alignnone" style="height: 382px; width: 1208px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx2.png" alt=""></p>
-<p>1 影响了css的并行加载和body里面img的并行加载</p>
-<hr>
-
-<p><strong>外联js在css最后</strong></p>
-<p><pre class="lang:default decode:true ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>      &lt;script src=”H5FullscreenPage.js” type =”text/javascript” &gt;&lt;/script &gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p><img class="alignnone" style="height: 346px; width: 1228px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx3.png" alt=""></p>
-<p>1 影响了css的并行加载和body里面img的并行加载</p>
-<hr>
-
-<p><strong>内嵌js在css前面</strong></p>
-<p><pre class="lang:default decode:true ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;script type =”text/javascript” &gt;<br>          var f = 1;<br>          f++;<br>      &lt;/script &gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p><img class="alignnone" style="height: 451px; width: 1229px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx4.png" alt=""></p>
-<p>1 没有影响css的并行加载也没有影响body里面img的并行加载</p>
-<hr>
-
-<p><strong>内嵌js在css中间</strong></p>
-<p><pre class="lang:default decode:true ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;script type =”text/javascript” &gt;<br>          var f = 1;<br>          f++;<br>      &lt;/script &gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p><img class="alignnone" style="height: 437px; width: 1219px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx5.png" alt=""></p>
-<p>1 影响了css的并行加载没有英雄body里面img的并行加载</p>
-<hr>
-
-<p><strong>内嵌js在css最后</strong></p>
-<p><pre class="lang:default decode:true ">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;test&lt;/title&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”stylesheet.css” media=”screen”&gt;<br>      &lt;link rel=”stylesheet” type=”text/css” href=”page-animation.css” media=”screen”&gt;<br>      &lt;script type =”text/javascript” &gt;<br>          var f = 1;<br>          f++;<br>      &lt;/script &gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;img src=”download-button.png”&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</pre><br>&nbsp;</p>
-<p><img class="alignnone" style="height: 350px; width: 1228px;" src="http://1.lvming6816077.sinaapp.com/testaa/xx6.png" alt=""></p>
-<p>1 影响了css和body里面img的并行加载。</p>
-<hr>
-
-<p><strong>综上所述：</strong></p>
-<p><span style="font-family: verdana,arial,helvetica,sans-serif; font-size: 14px;">当浏览器从服务器接收到了HTML文档，并把HTML在内存中转换成DOM树，在转换的过程中如果发现某个节点(node)上引用了CSS或者 IMAGE，就会再发1个request去请求CSS或image,然后继续执行下面的转换，而不需要等待request的返回，当request返回 后，只需要把返回的内容放入到DOM树中对应的位置就OK。但当引用了JS的时候，浏览器发送1个js request就会一直等待该request的返回。因为浏览器需要1个稳定的DOM树结构，而JS中很有可能有代码直接改变了DOM树结构，浏览器为了防止出现JS修改DOM树，需要重新构建DOM树的情况，所以 就会阻塞其他的下载和呈现.</span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: 14px;">这里的结论：</span></p>
-<p><span style="font-size: 14px;">1 在head里面尽量不要引入javascript.</span></p>
-<p><span style="font-size: 14px;">2 如果要引入js 尽量将js内嵌.</span></p>
-<p><span style="font-size: 14px;">3 把内嵌js放在所有css的前面.</span></p>
-<p>&nbsp;</p>
-<p><strong><span style="color: #008080;">后记</span></strong></p>
-<p><span style="font-size: 14px;">1 本次的测试页面 </span><a href="http://1.lvming6816077.sinaapp.com/testaa/demo.html" target="_blank" rel="external">http://1.lvming6816077.sinaapp.com/testaa/demo.html</a></p>
-<p>2 测试所用浏览器 chrome</p>
-<p>3 参考资料：<a href="http://www.zhihu.com/question/20357435/answer/14878543" target="_blank" rel="external">http://www.zhihu.com/question/20357435/answer/14878543</a></p>
-<p><a href="http://www.haorooms.com/post/web_xnyh_jscss" target="_blank" rel="external">http://www.haorooms.com/post/web_xnyh_jscss</a></p>
-<p>4 如果有哪里说的不清楚或者错误的地方，欢迎留言反馈。</p>
-
+        <blockquote>
+<p>百度分享很坑！！</p>
+</blockquote>
+<h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><p>今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看：<br><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png" alt=""></p>
+<h5 id="这是什么鬼！"><a href="#这是什么鬼！" class="headerlink" title="这是什么鬼！"></a>这是什么鬼！</h5><p>忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。<br><a href="https://www.hrwhisper.me/baidu-share-not-support-https-solution/" target="_blank" rel="external">参考这篇教程</a></p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：</p>
+<ol>
+<li>这些文件都是被压缩的，想要直接修改还需要将文件反压缩一下。</li>
+<li>找到出错文件share.js，出错原因大概是语法错误，因为不知道逻辑，所以将出错的代码行删掉了。</li>
+<li>原本天真的以为万事大吉，谁知刷新之后🈶又出现两个新的错误。</li>
+</ol>
+<p><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png" alt=""></p>
+<h5 id="这又是什么鬼？"><a href="#这又是什么鬼？" class="headerlink" title="这又是什么鬼？"></a>这又是什么鬼？</h5><p>难道百度源码都是没有测试过的么？？</p>
+<ol>
+<li>找到出问题的文件tangram.js,代码又是被压缩的，找到出问题代码fix之。</li>
+<li>找到出问题的文件view_base.js,代码又是被压缩的，找到出问题代码fix之。</li>
+<li>刷新一看，尼玛怎么又冒出新的错误？<br><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png" alt=""></li>
+</ol>
+<h5 id="心累。。"><a href="#心累。。" class="headerlink" title="心累。。"></a>心累。。</h5><p>于是又开始想别的办法，发誓不在修改百度分享的源码了。。</p>
+<h3 id="完美解决"><a href="#完美解决" class="headerlink" title="完美解决"></a>完美解决</h3><p>经过一系列的查找的求助，终于找到了完美的结局办法：</p>
+<ol>
+<li>百度分享的js源码其实也有部署在百度的另外一个支持https的cdn上即：<a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js" target="_blank" rel="external"></a>.</li>
+<li>利用这个cdn的url同样可以得到其他js源码文件的地址：<br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js</a><br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js</a></li>
+<li>将原本的bdimg.share.baidu.com修改为ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv，同时将http换成https即可。</li>
+<li>但这并没有结束如果只改了share.js 这个js里面引入其他js同样会是http的，所以还需要将share.js inline到script标签里面，同时修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jscfg:&#123;<span class="attr">domain</span>:&#123;<span class="attr">staticUrl</span>:<span class="string">"https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/"</span>&#125;&#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>将用于模块化加载的js的地址也替换成新的。</p>
+<h4 id="大功告成！"><a href="#大功告成！" class="headerlink" title="大功告成！"></a>大功告成！</h4>
       
     </div>
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/530/" data-id="cj4fa8zy0001e5w9n77a99mtq" class="article-share-link" data-share="baidu" data-title="web前端性能优化之Html Css Javascript">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/701/" data-id="cj4fa8zy3001j5w9nycpo2vmp" class="article-share-link" data-share="baidu" data-title="百度分享HTTPS折腾记">分享到</a>
       
 
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/530/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span class="view-count" id="indexphparchives530learnCount">0</span> 次浏览</a>
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/530/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span class="view-count" id="indexphparchives701learnCount">0</span> 次浏览</a>
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
       
         <span class="cloud-tie-join-count"><span class="join-count">0</span></span>
       
       条评论</a>
       
-      <a href="/index.php/archives/530/" class="article-date-l">
-  <time datetime="2015-05-05T08:06:08.000Z" itemprop="datePublished">2015-05-05</time>
+      <a href="/index.php/archives/701/" class="article-date-l">
+  <time datetime="2017-06-26T14:48:20.000Z" itemprop="datePublished">2017-06-26</time>
 </a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动web/">移动web</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bdshare/">bdshare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
     </footer>
   </div>
