@@ -6,19 +6,19 @@
   
   <title>Webpack1升级Webpack2整理总结 | 吕小鸣前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化如下图：分别对相关的组件进行升级，图上所示的需要升级的组件只是针对自己项目的，如果需要升级">
+  <meta name="description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化">
 <meta name="keywords" content="webpack2,升级">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webpack1升级Webpack2整理总结">
 <meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/702/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
-<meta property="og:description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化如下图：分别对相关的组件进行升级，图上所示的需要升级的组件只是针对自己项目的，如果需要升级">
+<meta property="og:description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/blogcaikeng1.png">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/caikeng2.png">
-<meta property="og:updated_time" content="2017-07-09T15:02:41.000Z">
+<meta property="og:updated_time" content="2017-07-09T15:04:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webpack1升级Webpack2整理总结">
-<meta name="twitter:description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化如下图：分别对相关的组件进行升级，图上所示的需要升级的组件只是针对自己项目的，如果需要升级">
+<meta name="twitter:description" content="Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。 1.project.json的整体变化">
 <meta name="twitter:image" content="https://oc5n93kni.qnssl.com/blogcaikeng1.png">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
@@ -100,7 +100,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Webpack2已经发布半年之多了，就连webpack3都已经发布了，但是项目目前还是使用的webpack1，有点跟不上节奏，webpack2的诸多特性类似tree-shaking等等新特性还是比较令人激动的，现在整理一下从webpack1升级到webpack2的过程。</p>
-<h3 id="1-project-json的整体变化"><a href="#1-project-json的整体变化" class="headerlink" title="1.project.json的整体变化"></a>1.project.json的整体变化</h3><p>如下图：分别对相关的组件进行升级，图上所示的需要升级的组件只是针对自己项目的，如果需要升级其他组件可以根据自己的需求升级。<br><img src="https://oc5n93kni.qnssl.com/blogcaikeng1.png" alt=""></p>
+<h3 id="1-project-json的整体变化"><a href="#1-project-json的整体变化" class="headerlink" title="1.project.json的整体变化"></a>1.project.json的整体变化</h3><a id="more"></a>
+<p>如下图：分别对相关的组件进行升级，图上所示的需要升级的组件只是针对自己项目的，如果需要升级其他组件可以根据自己的需求升级。<br><img src="https://oc5n93kni.qnssl.com/blogcaikeng1.png" alt=""></p>
 <h3 id="2-安装升级组件"><a href="#2-安装升级组件" class="headerlink" title="2.安装升级组件"></a>2.安装升级组件</h3><p>每种组件的升级有两种办法：</p>
 <ol>
 <li>将组件从node_modules里面删掉，同时删掉project.json里的配置，然后在<code>npm install XXX</code>可以直接从官网下载最新的包。</li>
@@ -129,7 +130,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/702/" data-id="cj4wulv88000u1j9nr8xtybfu" class="article-share-link" data-share="baidu" data-title="Webpack1升级Webpack2整理总结">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/702/" data-id="cj4wuo0e000132b9nkczhg3nm" class="article-share-link" data-share="baidu" data-title="Webpack1升级Webpack2整理总结">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/702/#ds-thread" class="article-comment-link"><span class="dot">•</span>
