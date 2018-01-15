@@ -13,6 +13,7 @@
 <meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/550/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="前言 Facebook 在2015.9.15发布了 React Native for Android，把 JavaScript 开发技术扩展到了移动Android平台。基于React的React Native 让前端开发者使用 JavaScript 和 React 编写应用，利用相同的核心代码就可以创建 基于Web，iOS 和 Android 平台的原生应用。在React Native for A">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/xx.png">
 <meta property="og:updated_time" content="2017-04-28T03:07:09.000Z">
 <meta name="twitter:card" content="summary">
@@ -112,7 +113,7 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><span style="color: #008000;"><strong>环境搭建</strong></span></p>
-<p>环境搭建的话，在网上也找到过很多教程，但是还是推荐还是去看官方文档<a href="https://facebook.github.io/react-native/docs/android-setup.html#content" data-cke-saved-href="https://facebook.github.io/react-native/docs/android-setup.html#content" target="_blank" rel="external">https://facebook.github.io/react-native/docs/android-setup.html#content</a>，在搭建的过程中可能会遇到一些问题。</p>
+<p>环境搭建的话，在网上也找到过很多教程，但是还是推荐还是去看官方文档<a href="https://facebook.github.io/react-native/docs/android-setup.html#content" data-cke-saved-href="https://facebook.github.io/react-native/docs/android-setup.html#content" target="_blank" rel="noopener">https://facebook.github.io/react-native/docs/android-setup.html#content</a>，在搭建的过程中可能会遇到一些问题。</p>
 <p>&nbsp;</p>
 <p><strong>1 </strong>在React Native for Android刚出来的时候，官方称是不支持在windows 系统上安装的，只有在mac上才可以使用<img src="http://7jpp2v.com1.z0.glb.clouddn.com/1.png" alt="" data-cke-saved-src="http://7jpp2v.com1.z0.glb.clouddn.com/1.png">，但是最新版的React Native for Android已经支持在windows上使用，<img src="http://7jpp2v.com1.z0.glb.clouddn.com/2.png" alt="" data-cke-saved-src="http://7jpp2v.com1.z0.glb.clouddn.com/2.png">更新React Native的方法：下载最新版的react-native-cli即npm install -g react-native-cli，并且保证node是最新版的即&gt;4.0。</p>
 <p>&nbsp;</p>
@@ -123,7 +124,7 @@
 <p>&nbsp;</p>
 <p><strong>4 </strong>在调用react-native run-android命令时，其实这个命令就是执行的两部分操作1是构建你的android项目并生成apk，另外一个是打开react-native的package管理工具同时编译你的js文件，其实可以在项目根目录的package.json下找到</p>
 <p><img src="http://7jpp2v.com1.z0.glb.clouddn.com/44.png" alt="" data-cke-saved-src="http://7jpp2v.com1.z0.glb.clouddn.com/44.png"></p>
-<p>其实是执行了另外一条命令node node_modules\react-native\packager\packager.js来打开package的管理工具，有些可能没打开一个新的命令行窗口，自己手动执行这条node命令也是可以的。在这条命令执行完之后，node就会开启一个服务，同时把js文件编译成jsbundle文件，我们可以通过<a href="http://localhost:8081/index.android.bundle?platform=android" data-cke-saved-href="http://localhost:8081/index.android.bundle?platform=android" target="_blank" rel="external">http://localhost:8081/index.android.bundle?platform=android</a>来访问到这个文件，可以简单将这个文件理解成一个html，android就是通过解析这个html来达到渲染的目的，将该文件部署到CDN可供android app从网络获取，即可实现不用发版本让app的UI随时更新，并且可获得接近native的体验，这也是react-native最吸引开发者的亮点之一。</p>
+<p>其实是执行了另外一条命令node node_modules\react-native\packager\packager.js来打开package的管理工具，有些可能没打开一个新的命令行窗口，自己手动执行这条node命令也是可以的。在这条命令执行完之后，node就会开启一个服务，同时把js文件编译成jsbundle文件，我们可以通过<a href="http://localhost:8081/index.android.bundle?platform=android" data-cke-saved-href="http://localhost:8081/index.android.bundle?platform=android" target="_blank" rel="noopener">http://localhost:8081/index.android.bundle?platform=android</a>来访问到这个文件，可以简单将这个文件理解成一个html，android就是通过解析这个html来达到渲染的目的，将该文件部署到CDN可供android app从网络获取，即可实现不用发版本让app的UI随时更新，并且可获得接近native的体验，这也是react-native最吸引开发者的亮点之一。</p>
 <p>&nbsp;</p>
 <p><strong>5 </strong>用react native命令生成的android项目是基于gradle构建和部署的(不清楚gradle的可以google)，这个以前一些搞用eclipse来android开发的可能不太一样，gradle是用在google主推的一款android开发IDE，android statio里面默认的项目构建方式，所以我们的项目里会看到一些build.gradle的文件，这些都是配置文件。</p>
 <p>&nbsp;</p>
@@ -134,18 +135,18 @@
 <p><strong>与现有的android项目集成</strong></p>
 <p><strong>1 </strong>想要在现有的android项目里添加react native支持，你必须要先创建一个基于gradle的android项目，推荐使用android studio来创建项目，要记得创建的项目要高于Android 4.1 (API 16)的android项目。</p>
 <p>&nbsp;</p>
-<p><strong>2 </strong>用android studio创建一个项目 并且能跑起来，这段教程可以直接去网上少，一般配置无误的情况下，很容易跑出一个android helloword来，你只需要保持之前的node package服务开启，程序依然会去寻找<a href="http://localhost:8081/index.android.bundle?platform=android" data-cke-saved-href="http://localhost:8081/index.android.bundle?platform=android" target="_blank" rel="external">http://localhost:8081/index.android.bundle?platform=android</a>这个文件的。只是你的android模拟器是通过android studio来管理了。<br><strong>3 </strong>在按照<a href="http://facebook.github.io/react-native/docs/embedded-app-android.html#content" data-cke-saved-href="http://facebook.github.io/react-native/docs/embedded-app-android.html#content" target="_blank" rel="external">http://facebook.github.io/react-native/docs/embedded-app-android.html#content</a>配置你的结合项目时，还要注意在AndroidManifest.xml文件里面添加&lt;activity android:name=”com.facebook.react.devsupport.DevSettingsActivity” /&gt; 这样才能开启调试模式。</p>
+<p><strong>2 </strong>用android studio创建一个项目 并且能跑起来，这段教程可以直接去网上少，一般配置无误的情况下，很容易跑出一个android helloword来，你只需要保持之前的node package服务开启，程序依然会去寻找<a href="http://localhost:8081/index.android.bundle?platform=android" data-cke-saved-href="http://localhost:8081/index.android.bundle?platform=android" target="_blank" rel="noopener">http://localhost:8081/index.android.bundle?platform=android</a>这个文件的。只是你的android模拟器是通过android studio来管理了。<br><strong>3 </strong>在按照<a href="http://facebook.github.io/react-native/docs/embedded-app-android.html#content" data-cke-saved-href="http://facebook.github.io/react-native/docs/embedded-app-android.html#content" target="_blank" rel="noopener">http://facebook.github.io/react-native/docs/embedded-app-android.html#content</a>配置你的结合项目时，还要注意在AndroidManifest.xml文件里面添加&lt;activity android:name=”com.facebook.react.devsupport.DevSettingsActivity” /&gt; 这样才能开启调试模式。</p>
 <p>&nbsp;</p>
 <p><strong>4 </strong>对于android项目来说，react native的支持也是就在Activity里面创建了一个ReactRootView<img src="http://7jpp2v.com1.z0.glb.clouddn.com/77.png" alt="" data-cke-saved-src="http://7jpp2v.com1.z0.glb.clouddn.com/77.png">，对这不是webview，然后将Activity的其他事件生命周期等等都交给react manager来管理，所以对于react native的android页面，就可以简单理解成一个activety里面套一个reactrootview这个view去加载并jsbundle文件，渲染出原生native的ui组件。</p>
 <p>&nbsp;</p>
 <p><span style="color: #008000;"><strong>远程加载jsbundle文件</strong></span></p>
-<p><strong>1 </strong>目前在react android的官方文档里面，还没有找到如何远程加载jsbundle文件的地方，只能是事先把jsbundle文件放在assets目录下面，一起打包成apk，也就是release apk文件，可以参考<a href="https://facebook.github.io/react-native/docs/signed-apk-android.html" data-cke-saved-href="https://facebook.github.io/react-native/docs/signed-apk-android.html" target="_blank" rel="external">https://facebook.github.io/react-native/docs/signed-apk-android.html</a>。</p>
+<p><strong>1 </strong>目前在react android的官方文档里面，还没有找到如何远程加载jsbundle文件的地方，只能是事先把jsbundle文件放在assets目录下面，一起打包成apk，也就是release apk文件，可以参考<a href="https://facebook.github.io/react-native/docs/signed-apk-android.html" data-cke-saved-href="https://facebook.github.io/react-native/docs/signed-apk-android.html" target="_blank" rel="noopener">https://facebook.github.io/react-native/docs/signed-apk-android.html</a>。</p>
 <p>&nbsp;</p>
 <p><span style="color: #008000;"><strong>样式和布局</strong></span></p>
 <p><strong>1 </strong>react native的代码和react基本一样，组件的生命周期，jsx语法都支持，只是在使用jsx时要经常调用官方提供的组件。</p>
 <p><strong>2 </strong>react native里面的样式大部分是可以利用css语法来写的，只有文档里面有的属性才能用，不是所有的css都可以在react native里面用的，采用obj的形式将css属性横杠后面的第一个字母大写即可。</p>
 <p><img src="http://7jpp2v.com1.z0.glb.clouddn.com/88.png" alt="" data-cke-saved-src="http://7jpp2v.com1.z0.glb.clouddn.com/88.png"></p>
-<p><strong>3 </strong>react的宽高度不支持百分比，设置宽高度时不需要带单位，在react native里面默认使用pt为单位，注意在给image设置大小时要根据<a href="https://facebook.github.io/react-native/docs/pixelratio.html#content" data-cke-saved-href="https://facebook.github.io/react-native/docs/pixelratio.html#content" target="_blank" rel="external">PixelRatio</a>设置合适的值。</p>
+<p><strong>3 </strong>react的宽高度不支持百分比，设置宽高度时不需要带单位，在react native里面默认使用pt为单位，注意在给image设置大小时要根据<a href="https://facebook.github.io/react-native/docs/pixelratio.html#content" data-cke-saved-href="https://facebook.github.io/react-native/docs/pixelratio.html#content" target="_blank" rel="noopener">PixelRatio</a>设置合适的值。</p>
 <p><strong>4 </strong>使用dimensions.get(“window”)可以获取到当前viewport的大小，这个值可能会根据屏幕横竖来动态改变。</p>
 <p><strong>5 </strong>react native里面没有float的用法，是根据flex来布局，alignItems和justifyContent分别决定子元素的布局，而flexDirection决定子元素的排列方式垂直还是水平，flex:number决定子元素所占的比例，alignSelf决定元素本事的布局，子view会默认根据父view来absolute，这里有个技巧，如果想让子view实现100%的效果可以设置left：0 ,right :0,同理height可以用top:0,bottom:0。</p>
 <p><strong>6 </strong>使用text的numberOfLines可以实现文本截取省略号，即css的text-overflow属性。</p>
@@ -162,7 +163,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/550/" data-id="cjcfo50uj000udlnfz0i649w1" class="article-share-link" data-share="baidu" data-title="React Native Android 踩坑之旅">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/550/" data-id="cjcfoq2pf000to1nfj67u4k7h" class="article-share-link" data-share="baidu" data-title="React Native Android 踩坑之旅">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/550/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -344,7 +345,7 @@
           </li>
         
           <li>
-            <a href="http://www.u3xyz.com/" target="_blank">右三</a>
+            <a href="https://www.u3xyz.com/" target="_blank">右三</a>
           </li>
         
       </ul>

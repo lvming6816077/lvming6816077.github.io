@@ -13,6 +13,7 @@
 <meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/690/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="在移动端，使用滚动来处理业务逻辑的情况有很多，例如列表的滚动加载数据，下拉刷新等等都需要利用滚动的相关知识，但是滚动事件在不同的移动端机型却又有不同的表现，下面就来一一总结一下。">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/QQ20170414-0@2x.png">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/QQ20170414-1@2x.png">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1492155048.png">
@@ -142,14 +143,14 @@
 <p></p><h2 id="-3-">知识点3:滚动和下拉刷新</h2><p></p>
 <p><ol><br>     <li>下拉刷新的元素在页面顶部，正常浏览时不可见的。</li><br>     <li>当在页面顶部往下滚动时出现下拉刷新元素，当手指离开时收起。</li><br>     <li>以上两点时实现一个下拉刷新组件的基本步骤，结合我们上述关于滚动的描述，我们可以这样实现下拉刷新：<br><img src="https://oc5n93kni.qnssl.com/10AA2031-24A3-4858-BFA9-FF702231FB4C.png" width="220"><br><strong>方案1</strong>：借助iscroll的原理，整个页面使用模拟滚动，将下拉刷新元素放在顶部，当页面滚动到顶部下拉时，下拉刷新元素随着页面的滚动出现，当手指离开时收回，此方案实现起来较为简单直接借助iscoll即可，但是使用了模拟滚动之后在正常的列表滚动时性能上不如正常滚动。<br><strong>方案2</strong>：页面使用正常滚动，将下拉刷新元素放置在顶部top值为负值（正常情况下不可见），当页面处于顶部时下拉，这时监听touchmove事件，修改scrollcontent的tranlateY值，同时修改下拉刷新元素的tranlateY值，将两者同时位移来将下拉刷新元素显示出来，手指离开时（touchend）收回，这种方案满足了在正常列表滚动时使用原生的滚动节省性能，只在下拉刷新时使用模拟滚动来实现效果。<br><strong>方案3</strong>：方案2的改良版，唯一不同是将下拉刷新元素和scrollcontent放在一个div里，将下拉刷新元素的margintop设为负值，在下拉刷新时，只需要修改scrollcontent一个元素的tranlateY值即可实现下拉，在性能上要比方案2好。<br><img src="https://oc5n93kni.qnssl.com/pullrefresh3.gif" width="220"></li><br>     <li><strong>性能问题</strong>：在采用了上述方案之后，还会有一个性能上的问题就是：当页面的列表过长，dom元素过多时，在模拟滚动，下拉刷新这段时间内，页面也会有卡顿现象，这里采取了一个</li><br>     <li><strong>优化策略</strong>：<br>1) 列表较长时dom数量较多时，在触发下拉刷新的时机时将页面视窗之外的dom元素<strong>隐藏</strong>或者存放在fragment里面。<br>2) 在刷新完成之后手指离开（touchend）时将隐藏的元素显示出来。<br>3) 需要注意的是，隐藏和显示视窗外的元素这个操作在下拉刷新时只会<strong>执行一次</strong>，并且只有在下拉刷新时才会执行。</li><br></ol></p>
 <p></p><h1 id="alloypullrefresh">AlloyPullRefresh（基于上述知识点开发的组件）</h1><p></p>
-<p><ol><br>     <li>定义下拉刷新元素样式</li><br>     <li>下拉刷新事件回调</li><br>     <li>支持zepto版本和react版本</li><br></ol><br>github地址：<a href="https://github.com/AlloyTeam/AlloyPullRefresh/" target="_blank" rel="external">https://github.com/AlloyTeam/AlloyPullRefresh/</a></p>
+<p><ol><br>     <li>定义下拉刷新元素样式</li><br>     <li>下拉刷新事件回调</li><br>     <li>支持zepto版本和react版本</li><br></ol><br>github地址：<a href="https://github.com/AlloyTeam/AlloyPullRefresh/" target="_blank" rel="noopener">https://github.com/AlloyTeam/AlloyPullRefresh/</a></p>
 
       
     </div>
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/690/" data-id="cjcfo50wb001xdlnf1o7wa4oz" class="article-share-link" data-share="baidu" data-title="移动web之滚动篇">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/690/" data-id="cjcfoq2q1001wo1nfcjlxnvh0" class="article-share-link" data-share="baidu" data-title="移动web之滚动篇">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/690/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -331,7 +332,7 @@
           </li>
         
           <li>
-            <a href="http://www.u3xyz.com/" target="_blank">右三</a>
+            <a href="https://www.u3xyz.com/" target="_blank">右三</a>
           </li>
         
       </ul>

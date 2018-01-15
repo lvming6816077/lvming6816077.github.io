@@ -13,6 +13,7 @@
 <meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/701/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png">
@@ -105,7 +106,7 @@
 </blockquote>
 <h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><p>今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看：<br><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png" alt=""></p>
 <h5 id="这是什么鬼！"><a href="#这是什么鬼！" class="headerlink" title="这是什么鬼！"></a>这是什么鬼！</h5><a id="more"></a>
-<p>忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。<br><a href="https://www.hrwhisper.me/baidu-share-not-support-https-solution/" target="_blank" rel="external">参考这篇教程</a></p>
+<p>忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。<br><a href="https://www.hrwhisper.me/baidu-share-not-support-https-solution/" target="_blank" rel="noopener">参考这篇教程</a></p>
 <h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：</p>
 <ol>
 <li>这些文件都是被压缩的，想要直接修改还需要将文件反压缩一下。</li>
@@ -122,10 +123,10 @@
 <h5 id="心累。。"><a href="#心累。。" class="headerlink" title="心累。。"></a>心累。。</h5><p>于是又开始想别的办法，发誓不在修改百度分享的源码了。。</p>
 <h3 id="完美解决"><a href="#完美解决" class="headerlink" title="完美解决"></a>完美解决</h3><p>经过一系列的查找的求助，终于找到了完美的结局办法：</p>
 <ol>
-<li>百度分享的js源码其实也有部署在百度的另外一个支持https的cdn上即：<a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js" target="_blank" rel="external"></a>.</li>
-<li>利用这个cdn的url同样可以得到其他js源码文件的地址：<br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js</a><br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js" target="_blank" rel="external">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js</a></li>
+<li>百度分享的js源码其实也有部署在百度的另外一个支持https的cdn上即：<a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js" target="_blank" rel="noopener"></a>.</li>
+<li>利用这个cdn的url同样可以得到其他js源码文件的地址：<br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js" target="_blank" rel="noopener">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/tangram.js</a><br><a href="https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js" target="_blank" rel="noopener">https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/base/class.js</a></li>
 <li>将原本的bdimg.share.baidu.com修改为ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv，同时将http换成https即可。</li>
-<li>但这并没有结束如果只改了share.js 这个js里面引入其他js同样会是http的，所以还需要将share.js inline到script标签里面，同时修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jscfg:&#123;<span class="attr">domain</span>:&#123;<span class="attr">staticUrl</span>:<span class="string">"https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/"</span>&#125;&#125;&#125;</div></pre></td></tr></table></figure>
+<li>但这并没有结束如果只改了share.js 这个js里面引入其他js同样会是http的，所以还需要将share.js inline到script标签里面，同时修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jscfg:&#123;<span class="attr">domain</span>:&#123;<span class="attr">staticUrl</span>:<span class="string">"https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/"</span>&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>将用于模块化加载的js的地址也替换成新的。</p>
@@ -135,7 +136,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/701/" data-id="cjcfo50w0001wdlnfig8e1loc" class="article-share-link" data-share="baidu" data-title="百度分享HTTPS折腾记">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/701/" data-id="cjcfoq2q2001xo1nfr5rpijze" class="article-share-link" data-share="baidu" data-title="百度分享HTTPS折腾记">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -317,7 +318,7 @@
           </li>
         
           <li>
-            <a href="http://www.u3xyz.com/" target="_blank">右三</a>
+            <a href="https://www.u3xyz.com/" target="_blank">右三</a>
           </li>
         
       </ul>
