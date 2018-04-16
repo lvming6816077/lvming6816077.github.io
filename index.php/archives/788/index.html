@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580497_97_w1044_h720.gif">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580229_33_w2608_h1258.png">
-<meta property="og:updated_time" content="2018-04-16T06:12:52.398Z">
+<meta property="og:updated_time" content="2018-04-16T06:17:57.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动web适配之--vh,vw,vmin,vmax">
 <meta name="twitter:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
@@ -109,12 +109,34 @@
 <li>vmin : 选取 vw 和 vh 中最小的那个</li>
 <li>vmax : 选取 vw 和 vh 中最大的那个</li>
 </ul>
-<p>那么什么是视口宽度呢？你一定不会陌生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>没错，浏览器利用<figure class="highlight plain"><figcaption><span>即```device-width```，关于浏览器的视口介绍可以参考这个[文章](https://www.quirksmode.org/mobile/viewports.html)。使用```document.documentElement.clientWidth```可以获取到浏览器的视口大小，这里要注意不一样的是类似```window.innerWidth```或者```window.screen.width```这些拿到的是浏览器的物理宽度，当width!</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## vh/vw与%区别在于</span><br><span class="line"></span><br><span class="line">| 单位  | 基于情况  |</span><br><span class="line">| ------------ | ------------ |</span><br><span class="line">|  % | 基于父元素  |</span><br><span class="line">| vh/vw  | 基于视口  |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">So，vh,vw,vmin,vmax都是基于viewport定义的width来定义单位，它是利用视口单位实现，依赖于视口大小而自动缩放，所以不同的设备视口大小不一样自然就达到的适配的效果。</span><br><span class="line"></span><br><span class="line">```css</span><br><span class="line">        .main &#123;</span><br><span class="line">            width: 60vw;</span><br><span class="line">            height: 60vw;</span><br><span class="line">            background-color: red;</span><br><span class="line">            text-align: center;</span><br><span class="line">            line-height: 60vw;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么什么是视口宽度呢？你一定不会陌生：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>没错，浏览器利用<code>viewport</code>的meta标签中的width来定义浏览器的视口大小，然而width可以使用数字单位来定义，只是我们常用的方法是：将width设置成设备的宽度 即<code>device-width</code>，关于浏览器的视口介绍可以参考这个<a href="https://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="noopener">文章</a>。使用<code>document.documentElement.clientWidth</code>可以获取到浏览器的视口大小，这里要注意不一样的是类似<code>window.innerWidth</code>或者<code>window.screen.width</code>这些拿到的是浏览器的物理宽度，当width!=device-width时是不等效的哦。</p>
+<h2 id="vh-vw与-区别在于"><a href="#vh-vw与-区别在于" class="headerlink" title="vh/vw与%区别在于"></a>vh/vw与%区别在于</h2><table>
+<thead>
+<tr>
+<th>单位</th>
+<th>基于情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%</td>
+<td>基于父元素</td>
+</tr>
+<tr>
+<td>vh/vw</td>
+<td>基于视口</td>
+</tr>
+</tbody>
+</table>
+<p>So，vh,vw,vmin,vmax都是基于viewport定义的width来定义单位，它是利用视口单位实现，依赖于视口大小而自动缩放，所以不同的设备视口大小不一样自然就达到的适配的效果。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">60vw</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">60vw</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">60vw</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif" alt=""></p>
 <h2 id="和rem相比优势？"><a href="#和rem相比优势？" class="headerlink" title="和rem相比优势？"></a>和rem相比优势？</h2><p>关于rem的适配大部分需要2个步骤：</p>
 <ol>
-<li>在页面头部引入js来动态设置页面的html的font-size，一般情况下基于屏幕宽度来计算 即：<figure class="highlight plain"><figcaption><span>rem </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2. 在使用css时，使用less或者scss来动态计算dom的实际rem数值</span><br><span class="line">```css</span><br><span class="line">@function px2rem($px) &#123;</span><br><span class="line">  $rem: 75px;</span><br><span class="line">  @return ($px / $rem) + rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在页面头部引入js来动态设置页面的html的font-size，一般情况下基于屏幕宽度来计算 即：<code>var rem = docEl.clientWidth / 10;docEl.style.fontSize = rem + &#39;px&#39;;</code></li>
+<li>在使用css时，使用less或者scss来动态计算dom的实际rem数值<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">function</span> px2rem($px) &#123;</span><br><span class="line">  $rem: 75px;</span><br><span class="line">  @<span class="keyword">return</span> ($px / $rem) + rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <p>由此会有2个问题：</p>
 <ul>
@@ -135,7 +157,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cjg1ueu500024i7nfd38z9k5x" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cjg1uldmt0024j4nf1p6ojsqo" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/788/#ds-thread" class="article-comment-link"><span class="dot">•</span>
