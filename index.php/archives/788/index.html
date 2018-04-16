@@ -6,21 +6,21 @@
   
   <title>移动web适配之--vh,vw,vmin,vmax | 吕小鸣前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。 关于vh,vw,vmin,vmax先来看下这些单位分别代表什么意思：  vw :">
+  <meta name="description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
 <meta name="keywords" content="移动web适配,vmin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动web适配之--vh,vw,vmin,vmax">
 <meta property="og:url" content="http://www.nihaoshijie.com.cn/index.php/archives/788/index.html">
 <meta property="og:site_name" content="吕小鸣前端博客">
-<meta property="og:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。 关于vh,vw,vmin,vmax先来看下这些单位分别代表什么意思：  vw :">
+<meta property="og:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580497_97_w1044_h720.gif">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580229_33_w2608_h1258.png">
-<meta property="og:updated_time" content="2018-04-16T06:09:42.307Z">
+<meta property="og:updated_time" content="2018-04-16T06:12:52.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动web适配之--vh,vw,vmin,vmax">
-<meta name="twitter:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。 关于vh,vw,vmin,vmax先来看下这些单位分别代表什么意思：  vw :">
+<meta name="twitter:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
 <meta name="twitter:image" content="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
@@ -101,7 +101,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的<a href="http://km.oa.com/group/19674/articles/show/258383" target="_blank" rel="noopener">文章</a>。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的<a href="https://www.nihaoshijie.com.cn/index.php/archives/593/">文章</a>。<br><a id="more"></a></p>
 <h2 id="关于vh-vw-vmin-vmax"><a href="#关于vh-vw-vmin-vmax" class="headerlink" title="关于vh,vw,vmin,vmax"></a>关于vh,vw,vmin,vmax</h2><p>先来看下这些单位分别代表什么意思：</p>
 <ul>
 <li>vw : 1vw 等于视口宽度的1%</li>
@@ -135,7 +135,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cjg1ub6aw001wh0nfhvkxkx06" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cjg1ueu500024i7nfd38z9k5x" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/788/#ds-thread" class="article-comment-link"><span class="dot">•</span>
