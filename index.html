@@ -204,6 +204,89 @@
 
 
   
+    <article id="post-移动web适配之--vh,vw,vmin,vmax" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner list">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/index.php/archives/788/">移动web适配之--vh,vw,vmin,vmax</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的<a href="http://km.oa.com/group/19674/articles/show/258383" target="_blank" rel="noopener">文章</a>。</p>
+<h2 id="关于vh-vw-vmin-vmax"><a href="#关于vh-vw-vmin-vmax" class="headerlink" title="关于vh,vw,vmin,vmax"></a>关于vh,vw,vmin,vmax</h2><p>先来看下这些单位分别代表什么意思：</p>
+<ul>
+<li>vw : 1vw 等于视口宽度的1%</li>
+<li>vh : 1vh 等于视口高度的1%</li>
+<li>vmin : 选取 vw 和 vh 中最小的那个</li>
+<li>vmax : 选取 vw 和 vh 中最大的那个</li>
+</ul>
+<p>那么什么是视口宽度呢？你一定不会陌生：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>没错，浏览器利用<figure class="highlight plain"><figcaption><span>即```device-width```，关于浏览器的视口介绍可以参考这个[文章](https://www.quirksmode.org/mobile/viewports.html)。使用```document.documentElement.clientWidth```可以获取到浏览器的视口大小，这里要注意不一样的是类似```window.innerWidth```或者```window.screen.width```这些拿到的是浏览器的物理宽度，当width!</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## vh/vw与%区别在于</span><br><span class="line"></span><br><span class="line">| 单位  | 基于情况  |</span><br><span class="line">| ------------ | ------------ |</span><br><span class="line">|  % | 基于父元素  |</span><br><span class="line">| vh/vw  | 基于视口  |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">So，vh,vw,vmin,vmax都是基于viewport定义的width来定义单位，它是利用视口单位实现，依赖于视口大小而自动缩放，所以不同的设备视口大小不一样自然就达到的适配的效果。</span><br><span class="line"></span><br><span class="line">```css</span><br><span class="line">        .main &#123;</span><br><span class="line">            width: 60vw;</span><br><span class="line">            height: 60vw;</span><br><span class="line">            background-color: red;</span><br><span class="line">            text-align: center;</span><br><span class="line">            line-height: 60vw;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif" alt=""></p>
+<h2 id="和rem相比优势？"><a href="#和rem相比优势？" class="headerlink" title="和rem相比优势？"></a>和rem相比优势？</h2><p>关于rem的适配大部分需要2个步骤：</p>
+<ol>
+<li>在页面头部引入js来动态设置页面的html的font-size，一般情况下基于屏幕宽度来计算 即：<figure class="highlight plain"><figcaption><span>rem </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2. 在使用css时，使用less或者scss来动态计算dom的实际rem数值</span><br><span class="line">```css</span><br><span class="line">@function px2rem($px) &#123;</span><br><span class="line">  $rem: 75px;</span><br><span class="line">  @return ($px / $rem) + rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>由此会有2个问题：</p>
+<ul>
+<li>依赖页面头部的js设置，虽说基本上不会阻塞页面渲染，但是放在头部始终要进行一次dom计算，不算优雅。</li>
+<li>通常使用宽度来计算html的font-size时，对于那种很宽的手机或者是ipad，会导致适配的不准确(可以参考rem的页面放在ipad上横屏观察一下)。</li>
+</ul>
+<p>那么使用vmin基本上可以规避上面的问题：</p>
+<ul>
+<li>不依赖js执行。</li>
+<li>选取宽高之中较小的值进行适配。</li>
+</ul>
+<p><img src="https://oc5n93kni.qnssl.com/1522580497_97_w1044_h720.gif" alt=""></p>
+<h2 id="浏览器兼容性？"><a href="#浏览器兼容性？" class="headerlink" title="浏览器兼容性？"></a>浏览器兼容性？</h2><p>那么vh,vw,vmin,vmax这么方便，为什么还是没有流行起来呢？让我们来看看浏览器的<a href="https://caniuse.com/#search=vh" target="_blank" rel="noopener">兼容性</a>：<br><img src="https://oc5n93kni.qnssl.com/1522580229_33_w2608_h1258.png" alt=""></p>
+<p>Android4.4之前不支持是硬伤！</p>
+
+      
+    </div>
+
+    <footer class="article-footer">
+      
+
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/788/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span class="view-count" id="indexphparchives788learnCount">0</span> 次浏览</a>
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/788/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/788/" data-sourceId="">0</span>
+      
+      条评论</a>
+      
+      <a href="/index.php/archives/788/" class="article-date-l">
+  <time datetime="2018-04-09T15:00:13.000Z" itemprop="datePublished">2018-04-09</time>
+</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmin/">vmin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动web适配/">移动web适配</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  <!-- JavaScript 配置 -->
+<script>var yunModuleEnv = true;</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+<script>
+  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
+  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
+</script>
+
+
+
+  
     <article id="post-React 16升级指南" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner list">
@@ -647,74 +730,6 @@
 
 
   
-    <article id="post-HTTP2-Server-Push-研究" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner list">
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    <div style="background-image:url(https://oc5n93kni.qnssl.com/7542543_SPDY-to-HTTP2-Upgrade-and-Nginx_thumb.jpg);" class="post-pic"></div>
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/index.php/archives/651/">HTTP2 Server Push 研究</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><h2>1，HTTP2的新特性。</h2><br>关于HTTP2的新特性，读着可以参看我之前的文章，这里就不在多说了，本篇文章主要讲一下server push这个特性。<p></p>
-<p><a href="http://km.oa.com/group/19674/articles/show/276552" target="_blank" rel="noopener noreferrer">HTTPS与HTTP2的原理，搭建，性能测试对比</a></p>
-<p><a href="http://km.oa.com/articles/view/290595" target="_blank" rel="noopener noreferrer">HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事</a><br>
-        
-          <p class="article-more-link">
-            <a href="/index.php/archives/651/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      
-
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/651/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span class="view-count" id="indexphparchives651learnCount">0</span> 次浏览</a>
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/651/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/651/" data-sourceId="">0</span>
-      
-      条评论</a>
-      
-      <a href="/index.php/archives/651/" class="article-date-l">
-  <time datetime="2016-11-27T12:40:27.000Z" itemprop="datePublished">2016-11-27</time>
-</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http2/">http2</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  <!-- JavaScript 配置 -->
-<script>var yunModuleEnv = true;</script>
-<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-<script>
-  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
-  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
-</script>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -733,15 +748,15 @@
       <p class="desc">实践过，才懂得</p>
       <div class="post-info">
         <div class="info-inner">
-          <div class="info-num">31</div>
+          <div class="info-num">32</div>
           <div class="info-name">文章</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">21</div>
+          <div class="info-num">22</div>
           <div class="info-name">分类</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">33</div>
+          <div class="info-num">35</div>
           <div class="info-name">标签</div>
         </div>
       </div>
@@ -773,6 +788,10 @@
       <ul>
         
           <li class="recent-li">
+            <a href="/index.php/archives/788/">移动web适配之--vh,vw,vmin,vmax</a>
+          </li>
+        
+          <li class="recent-li">
             <a href="/index.php/archives/703/">React 16升级指南</a>
           </li>
         
@@ -788,10 +807,6 @@
             <a href="/index.php/archives/700/">吕小鸣博客搬家记Hexo</a>
           </li>
         
-          <li class="recent-li">
-            <a href="/index.php/archives/698/">HTTP2.0关于多路复用的研究</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -801,7 +816,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title-l">归档</h3>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -811,7 +826,7 @@
     
     <div class="widget">
       <h3 class="widget-title-l">标签</h3>
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bdshare/">bdshare</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react16-升级/">react16 升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack2/">webpack2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bdshare/">bdshare</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react16-升级/">react16 升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmin/">vmin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack2/">webpack2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web适配/">移动web适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -821,7 +836,7 @@
     
     <div class="widget tagcloud">
       <h3 class="widget-title-l">标签云</h3>
-      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/bdshare/" style="font-size: 10px;">bdshare</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/react16-升级/" style="font-size: 10px;">react16 升级</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/webpack2/" style="font-size: 10px;">webpack2</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/bdshare/" style="font-size: 10px;">bdshare</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/react16-升级/" style="font-size: 10px;">react16 升级</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/vmin/" style="font-size: 10px;">vmin</a> <a href="/tags/webpack2/" style="font-size: 10px;">webpack2</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/移动web适配/" style="font-size: 10px;">移动web适配</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
