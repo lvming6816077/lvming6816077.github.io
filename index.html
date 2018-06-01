@@ -204,6 +204,81 @@
 
 
   
+    <article id="post-Canvas制作点赞送心动画" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner list">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    <div style="background-image:url(https://oc5n93kni.qnssl.com/html-canvas.png);" class="post-pic"></div>
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/index.php/archives/802/">Canvas制作点赞送心动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="先看看效果"><a href="#先看看效果" class="headerlink" title="先看看效果"></a>先看看效果</h3><p><img src="https://oc5n93kni.qnssl.com/1527477112_60_w305_h232.gif" alt=""><br><img src="https://oc5n93kni.qnssl.com/1527476652_7_w380_h433.gif" alt=""></p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>1.动画中每颗心都有自己的透明度，位移，角度，缩放的变化动画，针对这些动画，可以分别调用canvas的相关API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctx.translate(this.x, this.y);</span><br><span class="line">ctx.rotate(this.angle);</span><br><span class="line">ctx.scale(this.scale, this.scale);</span><br><span class="line">ctx.globalAlpha = this.opacity;</span><br></pre></td></tr></table></figure>
+<p>2.在有大于1颗心的情况时，针对每颗心，在实现角度，缩放时必须要保存上一次canvas的状态，改变完成之后在恢复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.save();</span><br><span class="line">ctx.translate(this.x, this.y);</span><br><span class="line">ctx.rotate(this.angle);</span><br><span class="line">ctx.scale(this.scale, this.scale);</span><br><span class="line">ctx.globalAlpha = this.opacity;</span><br><span class="line">ctx.restore();</span><br></pre></td></tr></table></figure>
+<p>3.计算心位移路径(3次被塞尔曲线)<br>公式：<img src="https://oc5n93kni.qnssl.com/images/1527478364_96_w1098_h68.png" alt=""><br>转换成js代码计算心的x,y方向上的位移：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得贝塞尔曲线路径</span></span><br><span class="line"><span class="comment">     * 一共4个点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">getBezierLine</span>(<span class="params">heart</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">var</span> obj = heart.bezierPoint;</span><br><span class="line">         <span class="keyword">var</span> p0 = obj.p0;</span><br><span class="line">         <span class="keyword">var</span> p1 = obj.p1;</span><br><span class="line">         <span class="keyword">var</span> p2 = obj.p2;</span><br><span class="line">         <span class="keyword">var</span> p3 = obj.p3;</span><br><span class="line">         <span class="keyword">var</span> t = heart.bezierDis;</span><br><span class="line">         <span class="keyword">var</span> cx = <span class="number">3</span> * (p1.x - p0.x),</span><br><span class="line">         bx = <span class="number">3</span> * (p2.x - p1.x) - cx,</span><br><span class="line">         ax = p3.x - p0.x - cx - bx,</span><br><span class="line"></span><br><span class="line">    cy = <span class="number">3</span> * (p1.y - p0.y),</span><br><span class="line">    by = <span class="number">3</span> * (p2.y - p1.y) - cy,</span><br><span class="line">    ay = p3.y - p0.y - cy - by,</span><br><span class="line"></span><br><span class="line">    xt = ax * (t * t * t) + bx * (t * t) + cx * t + p0.x,</span><br><span class="line">    yt = ay * (t * t * t) + by * (t * t) + cy * t + p0.y;</span><br><span class="line"></span><br><span class="line">    heart.bezierDis += heart.speed;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    xt: xt,</span><br><span class="line">    yt: yt</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>路径如图所示：<br><img src="https://oc5n93kni.qnssl.com/1527478501_6_w166_h306.png" alt=""></p>
+<p>根据曲线路径方法可以实现心的运动轨迹：<br><img src="https://oc5n93kni.qnssl.com/1527479519_2_w305_h232.gif" alt=""></p>
+<p>4.针对每一帧需要动态修改，心的位移，角度，和缩放：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 计算缩放角度的方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFScale</span>(<span class="params">heart</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _scale = heart.scale;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 随着距离起始点的距离增加，scale不断变大</span></span><br><span class="line">    <span class="keyword">let</span> dis = heart.orignY - heart.y;</span><br><span class="line">    _scale = (dis / heart.scaleDis);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当大于设置的阈值时变成1</span></span><br><span class="line">    <span class="keyword">if</span> (dis &gt;= heart.scaleDis) &#123;</span><br><span class="line">        _scale = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _scale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.计算心角度变化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 计算心左右摇摆的方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rangeAngle</span>(<span class="params">heart</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _angle = heart.angle;</span><br><span class="line">    <span class="comment">// 心介于[start, end]之间不断变化角度</span></span><br><span class="line">    <span class="keyword">if</span>(_angle &gt;= heart.angelEnd) &#123;</span><br><span class="line">    <span class="comment">// 角度不断变小，向左摇摆</span></span><br><span class="line">    heart.angleLeft = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_angle &lt;= heart.angelBegin)&#123;</span><br><span class="line">    <span class="comment">// 角度不断变大，向又摇摆</span></span><br><span class="line">    heart.angleLeft = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 动态改变角度</span></span><br><span class="line">    <span class="keyword">if</span> (heart.angleLeft) &#123;</span><br><span class="line">    _angle = _angle + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    _angle = _angle - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _angle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>整个组件代码不超过200行，相较于使用css3实现更加轻便，dom少，性能更好。<br>组件地址：<a href="https://github.com/lvming6816077/like-heart" target="_blank" rel="noopener">https://github.com/lvming6816077/like-heart</a></p>
+
+      
+    </div>
+
+    <footer class="article-footer">
+      
+
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/802/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span class="view-count" id="indexphparchives802learnCount">0</span> 次浏览</a>
+      <a href="http://www.nihaoshijie.com.cn/index.php/archives/802/#ds-thread" class="article-comment-link"><span class="dot">•</span>
+      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/802/" data-sourceId="">0</span>
+      
+      条评论</a>
+      
+      <a href="/index.php/archives/802/" class="article-date-l">
+  <time datetime="2018-06-01T15:00:13.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/点赞/">点赞</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  <!-- JavaScript 配置 -->
+<script>var yunModuleEnv = true;</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+<script>
+  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
+  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
+</script>
+
+
+
+  
     <article id="post-移动web适配之--vh,vw,vmin,vmax" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner list">
@@ -640,73 +715,6 @@
 
 
   
-    <article id="post-线条之美，玩转SVG线条动画" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner list">
-    
-<div class="article-gallery">
-  <div class="article-gallery-photos">
-    <div style="background-image:url(https://oc5n93kni.qnssl.com/ilu2.gif);" class="post-pic"></div>
-  </div>
-</div>
-
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/index.php/archives/667/">线条之美，玩转SVG线条动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通常来说web前端实现动画效果主要通过下面几种方案：</p>
-<p><ul><br>     <li>css动画；利用css3的样式效果可以将dom元素做出动画的效果来。</li><br>     <li>canvas动画；利用canvas提供的API，然后利用清除-渲染这样一帧一帧的做出动画效果。</li><br>     <li>svg动画；同样svg也提供了不少的API来实现动画效果，并且兼容性也不差，本文主要讲解一下如何制作svg线条动画。</li><br></ul><br>
-        
-          <p class="article-more-link">
-            <a href="/index.php/archives/667/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      
-
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/667/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span class="view-count" id="indexphparchives667learnCount">0</span> 次浏览</a>
-      <a href="http://www.nihaoshijie.com.cn/index.php/archives/667/#ds-thread" class="article-comment-link"><span class="dot">•</span>
-      <span lang="join-count" class="join-count" data-url="://www.nihaoshijie.com.cn/index.php/archives/667/" data-sourceId="">0</span>
-      
-      条评论</a>
-      
-      <a href="/index.php/archives/667/" class="article-date-l">
-  <time datetime="2017-02-20T12:23:10.000Z" itemprop="datePublished">2017-02-20</time>
-</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  <!-- JavaScript 配置 -->
-<script>var yunModuleEnv = true;</script>
-<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-<script>
-  var yunTieProductKey = "eb0b276c0f00410db0322e1a9a9b8bbc";
-  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vZXh0ZW5kL2xpc3Rfam9pbl9zY3JpcHQuaHRtbA==", true);
-</script>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -725,15 +733,15 @@
       <p class="desc">实践过，才懂得</p>
       <div class="post-info">
         <div class="info-inner">
-          <div class="info-num">32</div>
+          <div class="info-num">33</div>
           <div class="info-name">文章</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">22</div>
+          <div class="info-num">23</div>
           <div class="info-name">分类</div>
         </div>
         <div class="info-inner">
-          <div class="info-num">35</div>
+          <div class="info-num">37</div>
           <div class="info-name">标签</div>
         </div>
       </div>
@@ -765,6 +773,10 @@
       <ul>
         
           <li class="recent-li">
+            <a href="/index.php/archives/802/">Canvas制作点赞送心动画</a>
+          </li>
+        
+          <li class="recent-li">
             <a href="/index.php/archives/788/">移动web适配之--vh,vw,vmin,vmax</a>
           </li>
         
@@ -780,10 +792,6 @@
             <a href="/index.php/archives/701/">百度分享HTTPS折腾记</a>
           </li>
         
-          <li class="recent-li">
-            <a href="/index.php/archives/700/">吕小鸣博客搬家记Hexo</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -793,7 +801,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title-l">归档</h3>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -803,7 +811,7 @@
     
     <div class="widget">
       <h3 class="widget-title-l">标签</h3>
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bdshare/">bdshare</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react16-升级/">react16 升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmin/">vmin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack2/">webpack2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web适配/">移动web适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5游戏/">HTML5游戏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bdshare/">bdshare</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome插件/">chrome插件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css动画/">css动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/">http2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react16-升级/">react16 升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rem/">rem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/requirejs/">requirejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmin/">vmin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack2/">webpack2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/下拉刷新/">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全屏滚动/">全屏滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搬家/">博客搬家</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手势解锁/">手势解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滚动/">滚动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点赞/">点赞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线存储/">离线存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web/">移动web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动web适配/">移动web适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频直播/">视频直播</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -813,7 +821,7 @@
     
     <div class="widget tagcloud">
       <h3 class="widget-title-l">标签云</h3>
-      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/bdshare/" style="font-size: 10px;">bdshare</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/react16-升级/" style="font-size: 10px;">react16 升级</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/vmin/" style="font-size: 10px;">vmin</a> <a href="/tags/webpack2/" style="font-size: 10px;">webpack2</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/移动web适配/" style="font-size: 10px;">移动web适配</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/HTML5/" style="font-size: 20px;">HTML5</a> <a href="/tags/HTML5游戏/" style="font-size: 10px;">HTML5游戏</a> <a href="/tags/React-Native/" style="font-size: 16.67px;">React Native</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/bdshare/" style="font-size: 10px;">bdshare</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/chrome插件/" style="font-size: 13.33px;">chrome插件</a> <a href="/tags/css动画/" style="font-size: 10px;">css动画</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/http2/" style="font-size: 16.67px;">http2</a> <a href="/tags/https/" style="font-size: 13.33px;">https</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/react16-升级/" style="font-size: 10px;">react16 升级</a> <a href="/tags/rem/" style="font-size: 10px;">rem</a> <a href="/tags/requirejs/" style="font-size: 13.33px;">requirejs</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/vmin/" style="font-size: 10px;">vmin</a> <a href="/tags/webpack2/" style="font-size: 10px;">webpack2</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/全屏滚动/" style="font-size: 10px;">全屏滚动</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/博客搬家/" style="font-size: 10px;">博客搬家</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/手势解锁/" style="font-size: 10px;">手势解锁</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/滚动/" style="font-size: 10px;">滚动</a> <a href="/tags/点赞/" style="font-size: 10px;">点赞</a> <a href="/tags/离线存储/" style="font-size: 10px;">离线存储</a> <a href="/tags/移动web/" style="font-size: 20px;">移动web</a> <a href="/tags/移动web适配/" style="font-size: 10px;">移动web适配</a> <a href="/tags/视频直播/" style="font-size: 10px;">视频直播</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
