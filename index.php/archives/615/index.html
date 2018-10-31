@@ -15,7 +15,7 @@
 <meta property="og:description" content="视频直播这么火，再不学就out了。 为了紧跟潮流，本文将向大家介绍一下视频直播中的基本流程和主要的技术点，包括但不限于前端技术。 1 H5到底能不能做视频直播？当然可以， H5火了这么久，涵盖了各个方面的技术。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://oc5n93kni.qnssl.com/1-1604251R0335K.jpg">
-<meta property="og:updated_time" content="2017-05-16T02:42:23.000Z">
+<meta property="og:updated_time" content="2018-10-31T14:32:50.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5视频直播扫盲">
 <meta name="twitter:description" content="视频直播这么火，再不学就out了。 为了紧跟潮流，本文将向大家介绍一下视频直播中的基本流程和主要的技术点，包括但不限于前端技术。 1 H5到底能不能做视频直播？当然可以， H5火了这么久，涵盖了各个方面的技术。">
@@ -110,7 +110,7 @@
 <p></p><h2><strong>1 H5到底能不能做视频直播？</strong></h2><br>当然可以， H5火了这么久，涵盖了各个方面的技术。<br><a id="more"></a><br>对于视频录制，可以使用强大的<span style="color: #0000cd;">webRTC</span>（Web Real-Time Communication）是一个支持网页浏览器进行实时语音对话或视频对话的技术，缺点是只在PC的chrome上支持较好，移动端支持不太理想。<p></p>
 <p>对于视频播放，可以使用<span style="color: #0000cd;">HLS</span>(HTTP Live Streaming)协议播放直播流，ios和android都天然支持这种协议，配置简单，直接使用video标签即可。</p>
 <p>webRTC兼容性：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2010.24.48.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2010.24.48.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2010.24.48.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2010.24.48.png"></p>
 <p>video标签播放hls协议视频：</p>
 <p><pre class="lang:default decode:true">&lt;video controls autoplay&gt;<br>    &lt;source src=”<a href="http://10.66.69.77:8080/hls/mystream.m3u8" target="_blank" rel="noopener">http://10.66.69.77:8080/hls/mystream.m3u8</a>“ type=”application/vnd.apple.mpegurl” /&gt;<br>    &lt;p class=”warning”&gt;Your browser does not support HTML5 video.&lt;/p&gt;<br>&lt;/video&gt;</pre></p>
 <p></p><h2><strong>2 到底什么是HLS协议？</strong></h2><br>当简单讲就是把整个流分成一个个小的基于HTTP的文件来下载，每次只下载一些，前面提到了用于H5播放直播视频时引入的一个<span style="color: #0000cd;">.m3u8</span>的文件，这个文件就是基于HLS协议，存放视频流元数据的文件。<p></p>
@@ -122,17 +122,17 @@
 <p>#EXT-X-ALLOW-CACHE          是否允许cache</p>
 <p>#EXT-X-ENDLIST              m3u8文件结束符</p>
 <p>#EXTINF                     指定每个媒体段(ts)的持续时间（秒），仅对其后面的URI有效<br>mystream-12.ts<br>ts文件：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.09.29.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.09.29.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.09.29.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.09.29.png"></p>
 <p>HLS的请求流程是：<br><strong>1 http请求m3u8的url<br>2 服务端返回一个m3u8的播放列表，这个播放列表是实时跟新的，一般一次给出3段数据的url<br>3 客户端解析m3u8的播放列表，再按序请求每一段的url，获取ts数据流</strong></p>
 <p>简单流程：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.20.29.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.20.29.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.20.29.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.20.29.png"></p>
 <p></p><h2><strong>3 HLS直播延时</strong></h2><br>当我们知道hls协议是将直播流分成一段一段的小段视频去下载播放的，所以假设列表里面的包含5个TS文件，每个TS文件包含5秒的视频内容，那么整体的延迟就是25秒。因为当你看到这些视频时，主播已经将视频录制好上传上去了，所以时这样产生的延迟。当然可以缩短列表的长度和单个TS文件的大小来降低延迟，极致来说可以缩减列表长度为1，并且TS的时长为1s，但是这样会造成请求次数增加，增大服务器压力，当网速慢时回造成更多的缓冲，所以苹果官方推荐的ts时长时10s，所以这样就会大改有30s的延迟。参考资料：<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/FrequentlyAskedQuestions/FrequentlyAskedQuestions.html" data-cke-saved-href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/FrequentlyAskedQuestions/FrequentlyAskedQuestions.html" target="_blank" rel="noopener">https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/FrequentlyAskedQuestions/FrequentlyAskedQuestions.html</a><p></p>
 <p></p><h2><strong>4 视频直播的整个流程是什么？</strong></h2><br>当视频直播可大致分为：<p></p>
 <p><strong>1 视频录制端：一般是电脑上的音视频输入设备或者手机端的摄像头或者麦克风，目前已移动端的手机视频为主。</strong></p>
 <p><strong>2 视频播放端：可以是电脑上的播放器，手机端的native播放器，还有就是h5的video标签等，目前还是已手机端的native播放器为主。</strong></p>
 <p><strong>3 视频服务器端：一般是一台nginx服务器，用来接受视频录制端提供的视频源，同时提供给视频播放端流服务。</strong></p>
 <p>简单流程：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.33.20.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.33.20.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.33.20.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2011.33.20.png"></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p></p><h2><strong>5 怎样进行音视频采集？</strong></h2><br>当首先明确几个概念：<p></p>
@@ -148,11 +148,11 @@
 <p>ffmpeg编码：<a href="https://github.com/kewlbear/FFmpeg-iOS-build-script" data-cke-saved-href="https://github.com/kewlbear/FFmpeg-iOS-build-script" target="_blank" rel="noopener">https://github.com/kewlbear/FFmpeg-iOS-build-script</a></p>
 <p>关于如果想给视频增加一些特殊效果，例如增加滤镜等，一般在编码前给使用滤镜库，但是这样也会造成一些耗时，导致上传视频数据有一定延时。</p>
 <p>简单流程：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2012.07.49.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2012.07.49.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2012.07.49.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-23%2012.07.49.png"></p>
 <p></p><h2><strong>6 前面提到的ffmpeg是什么？</strong></h2><br>和之前的<span style="color: #0000cd;">x264</span>一样，<span style="color: #0000cd;">ffmpeg</span>其实也是一套编码库，类似的还有Xvid，Xvid是基于MPEG4协议的编解码器，x264是基于H.264协议的编码器，ffmpeg集合了各种音频，视频编解码协议，通过设置参数可以完成基于MPEG4,H.264等协议的编解码，demo这里使用的是x264编码库。<p></p>
 <p></p><h2><strong>7 什么是RTMP？</strong></h2><br>Real Time Messaging Protocol（简称 RTMP）是 Macromedia 开发的一套视频直播协议，现在属于 Adobe。和HLS一样都可以应用于视频直播，区别是RTMP基于flash无法在ios的浏览器里播放，但是实时性比HLS要好。所以一般使用这种协议来上传视频流，也就是视频流推送到服务器。<p></p>
 <p>这里列举一下hls和rtmp对比：</p>
-<p><img src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%2010.43.02.png" alt="" data-cke-saved-src="http://tenny.qiniudn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%2010.43.02.png"></p>
+<p><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%2010.43.02.png" alt="" data-cke-saved-src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%2010.43.02.png"></p>
 <p></p><h2><strong>8 推流</strong></h2><br>简所谓推流，就是将我们已经编码好的音视频数据发往视频流服务器中，一般常用的是使用rtmp推流，可以使用第三方库<strong><a href="https://github.com/ifactorylab/librtmp-iOS" data-cke-saved-href="https://github.com/ifactorylab/librtmp-iOS" target="_blank" rel="noopener">librtmp-iOS</a></strong>进行推流，librtmp封装了一些核心的api供使用者调用，如果觉得麻烦，可以使用现成的ios视频推流sdk，也是基于rtmp的，<a href="https://github.com/runner365/LiveVideoCoreSDK" data-cke-saved-href="https://github.com/runner365/LiveVideoCoreSDK" target="_blank" rel="noopener">https://github.com/runner365/LiveVideoCoreSDK</a><p></p>
 <p></p><h2><strong>9 推流服务器搭建</strong></h2><br>简简单的推流服务器搭建，由于我们上传的视频流都是基于rtmp协议的，所以服务器也必须要支持rtmp才行，大概需要以下几个步骤：<p></p>
 <p><strong>1 安装一台nginx服务器。</strong></p>
@@ -190,7 +190,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/615/" data-id="cjneq0nh4000c8fnfqrcc750c" class="article-share-link" data-share="baidu" data-title="H5视频直播扫盲">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/615/" data-id="cjnx9h4l3000c54nf96vk08y1" class="article-share-link" data-share="baidu" data-title="H5视频直播扫盲">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/615/#ds-thread" class="article-comment-link"><span class="dot">•</span>
