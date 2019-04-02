@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="写在前面这篇文档 是我结合以往的项目经验 加上自己本身对react webpack redux理解写下的总结文档，总共耗时一周总结下来的，希望能对读者能够有收获。 目录 版本说明 目录结构 初始化项目 webpack react 配置loader(sass,jsx)) 引入babel 使用HtmlWebpackPlugin redux 使用webpack-dev-server 多入口页面配置 如何">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/images/reactquanjiatong.png">
-<meta property="og:updated_time" content="2018-10-18T14:38:50.458Z">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/images/reactquanjiatong.png">
+<meta property="og:updated_time" content="2019-04-02T16:49:35.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最新React全家桶实战使用配置指南">
 <meta name="twitter:description" content="写在前面这篇文档 是我结合以往的项目经验 加上自己本身对react webpack redux理解写下的总结文档，总共耗时一周总结下来的，希望能对读者能够有收获。 目录 版本说明 目录结构 初始化项目 webpack react 配置loader(sass,jsx)) 引入babel 使用HtmlWebpackPlugin redux 使用webpack-dev-server 多入口页面配置 如何">
-<meta name="twitter:image" content="https://oc5n93kni.qnssl.com/images/reactquanjiatong.png">
+<meta name="twitter:image" content="https://qiniu.nihaoshijie.com.cn/images/reactquanjiatong.png">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
@@ -88,7 +88,7 @@
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
-    <div style="background-image:url(https://oc5n93kni.qnssl.com/images/reactquanjiatong.png);" class="post-pic"></div>
+    <div style="background-image:url(https://qiniu.nihaoshijie.com.cn/images/reactquanjiatong.png);" class="post-pic"></div>
   </div>
 </div>
 
@@ -306,7 +306,7 @@
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pageDir = path.resolve(srcRoot, <span class="string">'page'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getEntry</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> entryMap = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    fs.readdirSync(pageDir).forEach(<span class="function">(<span class="params">pathname</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fullPathName = path.resolve(pageDir, pathname);</span><br><span class="line">        <span class="keyword">let</span> stat = fs.statSync(fullPathName);</span><br><span class="line">        <span class="keyword">let</span> fileName = path.resolve(fullPathName, <span class="string">'index.js'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (stat.isDirectory() &amp;&amp; fs.existsSync(fileName)) &#123;</span><br><span class="line">            entryMap[pathname] = fileName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> entryMap;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    entry: getEntry()</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>本demo采用的是第二中写法，能够更加灵活。</p>
-<h1 id="如何理解entry-point-bundle-chunk-module"><a href="#如何理解entry-point-bundle-chunk-module" class="headerlink" title="如何理解entry point(bundle),chunk,module"></a>如何理解<code>entry point(bundle)</code>,<code>chunk</code>,<code>module</code><div id="entry"></div></h1><p>在webpack中，如何理解<code>entry point(bundle)</code>,<code>chunk</code>,<code>module</code>?<br><img src="https://oc5n93kni.qnssl.com/image/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-15%20%E4%B8%8B%E5%8D%889.06.45.png" alt=""></p>
+<h1 id="如何理解entry-point-bundle-chunk-module"><a href="#如何理解entry-point-bundle-chunk-module" class="headerlink" title="如何理解entry point(bundle),chunk,module"></a>如何理解<code>entry point(bundle)</code>,<code>chunk</code>,<code>module</code><div id="entry"></div></h1><p>在webpack中，如何理解<code>entry point(bundle)</code>,<code>chunk</code>,<code>module</code>?<br><img src="https://qiniu.nihaoshijie.com.cn/image/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-15%20%E4%B8%8B%E5%8D%889.06.45.png" alt=""></p>
 <p>根据图上的表述，我这里简单说一下便于理解的结论：<br></p>
 <ul>
 <li>配置中每个文件例如index1.js,index2.js,detail.js,home.js都属于<code>entry point</code>.</li>
@@ -541,7 +541,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/793/" data-id="cjtzy9qxr005kronf5oawfid5" class="article-share-link" data-share="baidu" data-title="最新React全家桶实战使用配置指南">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/793/" data-id="cju00tpla005lxenflb03xjs4" class="article-share-link" data-share="baidu" data-title="最新React全家桶实战使用配置指南">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/793/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -585,7 +585,7 @@
 
 
   <!--搜狐畅言 PC和WAP自适应版 添加于20190402-->
-<div id="SOHUCS" sid="cjtzy9qxr005kronf5oawfid5" ></div> 
+<div id="SOHUCS" sid="cju00tpla005lxenflb03xjs4" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cyuabuJwF'; 

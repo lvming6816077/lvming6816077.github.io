@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png">
-<meta property="og:updated_time" content="2017-06-27T08:03:30.000Z">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png">
+<meta property="og:updated_time" content="2019-04-02T16:49:33.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度分享HTTPS折腾记">
 <meta name="twitter:description" content="百度分享很坑！！  发现问题今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看： 这是什么鬼！">
-<meta name="twitter:image" content="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
+<meta name="twitter:image" content="https://qiniu.nihaoshijie.com.cn/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
@@ -104,7 +104,7 @@
         <blockquote>
 <p>百度分享很坑！！</p>
 </blockquote>
-<h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><p>今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看：<br><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png" alt=""></p>
+<h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><p>今天打开博客忽然发现百度分享用不了了，点击分享按钮没有任何作用，于是打开控制台查看：<br><img src="https://qiniu.nihaoshijie.com.cn/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.04.png" alt=""></p>
 <h5 id="这是什么鬼！"><a href="#这是什么鬼！" class="headerlink" title="这是什么鬼！"></a>这是什么鬼！</h5><a id="more"></a>
 <p>忽然想起来，之前我也是为了解决百度分享不支持https时，参考网上的做法将百度分享的js文件，也就是那个static文件夹拷贝到本地使用。<br><a href="https://www.hrwhisper.me/baidu-share-not-support-https-solution/" target="_blank" rel="noopener">参考这篇教程</a></p>
 <h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>但是怎么今天突然不行了呢，我敢肯定当时改完时没问题的，于是尝试找到出错的地方，进行修复：</p>
@@ -113,12 +113,12 @@
 <li>找到出错文件share.js，出错原因大概是语法错误，因为不知道逻辑，所以将出错的代码行删掉了。</li>
 <li>原本天真的以为万事大吉，谁知刷新之后🈶又出现两个新的错误。</li>
 </ol>
-<p><img src="https://oc5n93kni.qnssl.com/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png" alt=""></p>
+<p><img src="https://qiniu.nihaoshijie.com.cn/blog/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-26%2021.56.42.png" alt=""></p>
 <h5 id="这又是什么鬼？"><a href="#这又是什么鬼？" class="headerlink" title="这又是什么鬼？"></a>这又是什么鬼？</h5><p>难道百度源码都是没有测试过的么？？</p>
 <ol>
 <li>找到出问题的文件tangram.js,代码又是被压缩的，找到出问题代码fix之。</li>
 <li>找到出问题的文件view_base.js,代码又是被压缩的，找到出问题代码fix之。</li>
-<li>刷新一看，尼玛怎么又冒出新的错误？<br><img src="https://oc5n93kni.qnssl.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png" alt=""></li>
+<li>刷新一看，尼玛怎么又冒出新的错误？<br><img src="https://qiniu.nihaoshijie.com.cn/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-27%2011.55.17.png" alt=""></li>
 </ol>
 <h5 id="心累。。"><a href="#心累。。" class="headerlink" title="心累。。"></a>心累。。</h5><p>于是又开始想别的办法，发誓不在修改百度分享的源码了。。</p>
 <h3 id="完美解决"><a href="#完美解决" class="headerlink" title="完美解决"></a>完美解决</h3><p>经过一系列的查找的求助，终于找到了完美的结局办法：</p>
@@ -136,7 +136,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/701/" data-id="cjtzy9qt0001cronfw7lhg5y7" class="article-share-link" data-share="baidu" data-title="百度分享HTTPS折腾记">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/701/" data-id="cju00tpfi0016xenfdpo8bkce" class="article-share-link" data-share="baidu" data-title="百度分享HTTPS折腾记">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/701/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -180,7 +180,7 @@
 
 
   <!--搜狐畅言 PC和WAP自适应版 添加于20190402-->
-<div id="SOHUCS" sid="cjtzy9qt0001cronfw7lhg5y7" ></div> 
+<div id="SOHUCS" sid="cju00tpfi0016xenfdpo8bkce" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cyuabuJwF'; 

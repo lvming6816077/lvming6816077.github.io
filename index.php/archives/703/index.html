@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="先说一下升级带来的好处1. 更小的资源react+react dom打包之后 相较于上一个版本大小减少了约30%：如下图：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/1513841084_41_w791_h51.png">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/blog/1513841084_41_w791_h51.png">
-<meta property="og:updated_time" content="2018-03-07T08:37:37.495Z">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/1513841084_41_w791_h51.png">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/blog/1513841084_41_w791_h51.png">
+<meta property="og:updated_time" content="2019-04-02T16:49:55.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React 16升级指南">
 <meta name="twitter:description" content="先说一下升级带来的好处1. 更小的资源react+react dom打包之后 相较于上一个版本大小减少了约30%：如下图：">
-<meta name="twitter:image" content="https://oc5n93kni.qnssl.com/1513841084_41_w791_h51.png">
+<meta name="twitter:image" content="https://qiniu.nihaoshijie.com.cn/1513841084_41_w791_h51.png">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="先说一下升级带来的好处"><a href="#先说一下升级带来的好处" class="headerlink" title="先说一下升级带来的好处"></a>先说一下升级带来的好处</h1><h3 id="1-更小的资源"><a href="#1-更小的资源" class="headerlink" title="1. 更小的资源"></a>1. 更小的资源</h3><p>react+react dom打包之后 相较于上一个版本大小减少了约30%：如下图：<br><a id="more"></a><br>React 15：<br><img src="https://oc5n93kni.qnssl.com/1513841084_41_w791_h51.png" alt=""><br>React 16：<br><img src="https://oc5n93kni.qnssl.com/blog/1513841084_41_w791_h51.png" alt=""></p>
+        <h1 id="先说一下升级带来的好处"><a href="#先说一下升级带来的好处" class="headerlink" title="先说一下升级带来的好处"></a>先说一下升级带来的好处</h1><h3 id="1-更小的资源"><a href="#1-更小的资源" class="headerlink" title="1. 更小的资源"></a>1. 更小的资源</h3><p>react+react dom打包之后 相较于上一个版本大小减少了约30%：如下图：<br><a id="more"></a><br>React 15：<br><img src="https://qiniu.nihaoshijie.com.cn/1513841084_41_w791_h51.png" alt=""><br>React 16：<br><img src="https://qiniu.nihaoshijie.com.cn/blog/1513841084_41_w791_h51.png" alt=""></p>
 <h3 id="2-更强的渲染性能"><a href="#2-更强的渲染性能" class="headerlink" title="2. 更强的渲染性能"></a>2. 更强的渲染性能</h3><p>React 16是第一个对React核心代码进行了重构命名为React Fiber，Fiber 相较于之前最大的不同是它可以支持异步渲染，异步渲染的意义在于能够将渲染任务划分为多块。浏览器的渲染引擎是单线程的，这意味着几乎所有的行为都是同步发生的。React 16 使用原生的浏览器 API 来间歇性地检查当前是否还有其他任务需要完成，从而实现了对主线程和渲染过程的管理，这块具体的逻辑比较复杂，想要深入研究的可以参照React Fiber的源码。</p>
 <p>笔者尝试了将原来频繁setState的场景，例如拖动效果：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onTouchMove(e) &#123;</span><br><span class="line">   <span class="keyword">let</span> po = <span class="keyword">this</span>.getPosition(e);</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">        top: po.y,</span><br><span class="line">        left: po.x</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -147,7 +147,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/703/" data-id="cjtzy9qsj000jronfaiqk2545" class="article-share-link" data-share="baidu" data-title="React 16升级指南">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/703/" data-id="cju00tpf5000jxenfobv59eh4" class="article-share-link" data-share="baidu" data-title="React 16升级指南">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/703/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -191,7 +191,7 @@
 
 
   <!--搜狐畅言 PC和WAP自适应版 添加于20190402-->
-<div id="SOHUCS" sid="cjtzy9qsj000jronfaiqk2545" ></div> 
+<div id="SOHUCS" sid="cju00tpf5000jxenfobv59eh4" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cyuabuJwF'; 

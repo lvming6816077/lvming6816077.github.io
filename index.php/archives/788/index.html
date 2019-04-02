@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="吕小鸣前端博客">
 <meta property="og:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580497_97_w1044_h720.gif">
-<meta property="og:image" content="https://oc5n93kni.qnssl.com/1522580229_33_w2608_h1258.png">
-<meta property="og:updated_time" content="2018-04-16T06:17:57.500Z">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/1522579500_92_w551_h894.gif">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/1522580497_97_w1044_h720.gif">
+<meta property="og:image" content="https://qiniu.nihaoshijie.com.cn/1522580229_33_w2608_h1258.png">
+<meta property="og:updated_time" content="2019-04-02T16:49:23.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动web适配之--vh,vw,vmin,vmax">
 <meta name="twitter:description" content="前言其实关于vh,vw,vmin,vmax这四个单位，伴随着css3的出现就已经有了，但是当时移动web的浪潮已经来临，并且rem出现的要早，所以很多人忽略这个，但是rem使用适配是要依赖js来进行处理，今天介绍的vh,vw,vmin,vmax是完全基于css的自适应方案，关于rem的适配可以参考笔者之前写的文章。">
-<meta name="twitter:image" content="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif">
+<meta name="twitter:image" content="https://qiniu.nihaoshijie.com.cn/1522579500_92_w551_h894.gif">
   
     <link rel="alternative" href="/atom.xml" title="吕小鸣前端博客" type="application/atom+xml">
   
@@ -131,7 +131,7 @@
 </table>
 <p>So，vh,vw,vmin,vmax都是基于viewport定义的width来定义单位，它是利用视口单位实现，依赖于视口大小而自动缩放，所以不同的设备视口大小不一样自然就达到的适配的效果。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">60vw</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">60vw</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">60vw</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://oc5n93kni.qnssl.com/1522579500_92_w551_h894.gif" alt=""></p>
+<p><img src="https://qiniu.nihaoshijie.com.cn/1522579500_92_w551_h894.gif" alt=""></p>
 <h2 id="和rem相比优势？"><a href="#和rem相比优势？" class="headerlink" title="和rem相比优势？"></a>和rem相比优势？</h2><p>关于rem的适配大部分需要2个步骤：</p>
 <ol>
 <li>在页面头部引入js来动态设置页面的html的font-size，一般情况下基于屏幕宽度来计算 即：<code>var rem = docEl.clientWidth / 10;docEl.style.fontSize = rem + &#39;px&#39;;</code></li>
@@ -148,8 +148,8 @@
 <li>不依赖js执行。</li>
 <li>选取宽高之中较小的值进行适配。</li>
 </ul>
-<p><img src="https://oc5n93kni.qnssl.com/1522580497_97_w1044_h720.gif" alt=""></p>
-<h2 id="浏览器兼容性？"><a href="#浏览器兼容性？" class="headerlink" title="浏览器兼容性？"></a>浏览器兼容性？</h2><p>那么vh,vw,vmin,vmax这么方便，为什么还是没有流行起来呢？让我们来看看浏览器的<a href="https://caniuse.com/#search=vh" target="_blank" rel="noopener">兼容性</a>：<br><img src="https://oc5n93kni.qnssl.com/1522580229_33_w2608_h1258.png" alt=""></p>
+<p><img src="https://qiniu.nihaoshijie.com.cn/1522580497_97_w1044_h720.gif" alt=""></p>
+<h2 id="浏览器兼容性？"><a href="#浏览器兼容性？" class="headerlink" title="浏览器兼容性？"></a>浏览器兼容性？</h2><p>那么vh,vw,vmin,vmax这么方便，为什么还是没有流行起来呢？让我们来看看浏览器的<a href="https://caniuse.com/#search=vh" target="_blank" rel="noopener">兼容性</a>：<br><img src="https://qiniu.nihaoshijie.com.cn/1522580229_33_w2608_h1258.png" alt=""></p>
 <p>Android4.4之前不支持是硬伤！</p>
 
       
@@ -157,7 +157,7 @@
 
     <footer class="article-footer">
       
-        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cjtzy9qt7001jronf2vq2fszd" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
+        <a data-url="http://www.nihaoshijie.com.cn/index.php/archives/788/" data-id="cju00tpfo001ixenff8vuqblw" class="article-share-link" data-share="baidu" data-title="移动web适配之--vh,vw,vmin,vmax">分享到</a>
       
 
       <a href="http://www.nihaoshijie.com.cn/index.php/archives/788/#ds-thread" class="article-comment-link"><span class="dot">•</span>
@@ -201,7 +201,7 @@
 
 
   <!--搜狐畅言 PC和WAP自适应版 添加于20190402-->
-<div id="SOHUCS" sid="cjtzy9qt7001jronf2vq2fszd" ></div> 
+<div id="SOHUCS" sid="cju00tpfo001ixenff8vuqblw" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cyuabuJwF'; 
